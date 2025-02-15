@@ -1,0 +1,7 @@
+{
+  "foo_one": "an apple",
+  "foo_others": "{{count}} apples",
+  "selectCurrency": "Selecione a moeda",
+  "selectLanguage": "Selecione o idioma",
+  "confirm": "Confirmar"
+}

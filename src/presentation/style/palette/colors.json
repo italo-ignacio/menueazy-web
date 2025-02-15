@@ -1,0 +1,49 @@
+{
+  "primary": "#5E17EB",
+  "secondary": "#0F91D2",
+
+  "blue": {
+    "semiLight": "#0F91D2",
+    "semiDark": "#3E4958"
+  },
+
+  "red": "#E30513",
+  "lightRed": "#FAD1D8",
+
+  "input": {
+    "border": {
+      "1": "#D4D4D4",
+      "2": "#F0F0F0",
+      "3": "#D9D9D9"
+    }
+  },
+
+  "green": "#165428",
+  "yellow": "#FFB651",
+
+  "gray": {
+    "default": "#5E5851",
+    "50": "#FBFBFB",
+    "100": "#F3F3F3",
+    "125": "#F2F3F6",
+    "150": "#F3F5F9",
+    "200": "#E8E8E8",
+    "250": "#DFDFDF",
+    "300": "#D0D7DE",
+    "350": "#C4C4C4",
+    "500": "#818181",
+    "550": "#767676",
+    "700": "#444444",
+    "800": "#1D1D20",
+    "900": "#151519"
+  },
+
+  "success": "#3AAF5E",
+  "danger": "#E30513",
+  "warning": "#FFB651",
+  "info": "#4299FF",
+
+  "white": "#FFFFFF",
+  "black": "#000000",
+  "transparent": "transparent"
+}

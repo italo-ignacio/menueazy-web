@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/nunito-regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 400;
+  src: url('./assets/nunito-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./assets/nunito-semi-bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 600;
+  src: url('./assets/nunito-semi-bold-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./assets/nunito-bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 700;
+  src: url('./assets/nunito-bold-italic.ttf') format('truetype');
+}
+* {
+  font-family: 'Nunito';
+}
+
+html,
+body {
+  touch-action: manipulation;
+}
+
+html {
+  background-color: #ffffff;
+  color: #151519;
+}
+
+* {
+  scrollbar-color: '#00000063 transparent';
+  scrollbar-width: 'thin';
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+}
+
+::-webkit-scrollbar-track {
+  margin: 2px 0px;
+  background-color: transparent;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 136;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

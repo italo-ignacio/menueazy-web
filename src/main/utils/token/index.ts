@@ -1,0 +1,29 @@
+import { useAppSelector } from 'store';
+import jwtDecode from 'jwt-decode';
+
+export interface JwtPayload {
+  exp: number;
+  iat: number;
+  user: {
+    email: string;
+    id: number;
+    name: string;
+    role: string;
+  };
+}
+
+const isExpired = (accessToken: string | null): boolean => {
+  if (!accessToken || String(accessToken) === 'null') return true;
+
+  const token = jwtDecode(accessToken ?? '') as JwtPayload | null;
+
+  if (!token?.exp) return true;
+
+  return !!(Date.now() >= token.exp * 1000);
+};
+
+export const useTokenIsExpired = (): boolean => {
+  const { accessToken } = useAppSelector((state) => state.persist);
+
+  return isExpired(accessToken);
+};
