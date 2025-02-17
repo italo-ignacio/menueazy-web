@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpStatusCode } from 'domain/enums';
+import { LANGUAGE_STORAGE_KEY } from 'i18n';
 import { removeUndefined } from 'main/utils';
 import { store } from 'store';
 import type { ApiProps } from 'domain/protocol';
@@ -10,7 +11,7 @@ export const fetchApi = async <T>(params: ApiProps): Promise<T> => {
   const accessToken = params.token || store.getState().persist.accessToken;
 
   const body: any = params.isFormData ? params.body : JSON.stringify(params.body);
-  const headers = {};
+  const headers: any = { lang: localStorage.getItem(LANGUAGE_STORAGE_KEY) };
 
   if (accessToken) Object.assign(headers, { Authorization: `Bearer ${accessToken}` });
 
@@ -23,6 +24,8 @@ export const fetchApi = async <T>(params: ApiProps): Promise<T> => {
     params.queryParams && Object.values(removeUndefined(params.queryParams)).length
       ? `?${new URLSearchParams(removeUndefined(params.queryParams))}`
       : '';
+
+  console.log(headers);
 
   const response = await fetch(`${baseUrl}${params.route}${id}${queryParams}`, {
     body,
