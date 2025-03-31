@@ -2,10 +2,12 @@ import { SidebarItem } from 'presentation/atomic-component/atom/sidebar-item';
 import { logout } from 'store/persist/slice';
 import { setSidebar } from 'store/sidebar/slice';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import type { FC } from 'react';
 
 export const Logout: FC = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation('auth');
 
   return (
     <SidebarItem
@@ -14,7 +16,8 @@ export const Logout: FC = () => {
         dispatch(logout());
         dispatch(setSidebar(false));
       }}
-      title={'Sair do sistema'}
+      size={'large'}
+      title={t('logout')}
     />
   );
 };

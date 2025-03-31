@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import { FormButton } from 'presentation/atomic-component/atom/form-button';
 import { InputController } from 'presentation/atomic-component/atom/input-controller';
-import { useLogin } from 'data/use-case';
+import { useUserLogin } from 'data/use-case';
 import type { FC } from 'react';
 
 interface RegisterInterestFormProps {
@@ -15,7 +15,7 @@ export const RegisterInterestForm: FC<RegisterInterestFormProps> = ({ closeModal
     onSubmit,
     control,
     formState: { isSubmitting }
-  } = useLogin();
+  } = useUserLogin();
 
   return (
     <form className={'flex flex-col gap-5 w-full'} onSubmit={handleSubmit(onSubmit)}>

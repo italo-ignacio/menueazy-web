@@ -2,15 +2,29 @@
 import {
   AboutUsContent,
   AuthContent,
-  CompanyAdminContent,
   CompanyContent,
+  CompanyEmployeesContent,
+  CompanyRestaurantsContent,
+  CompanySubscriptionContent,
   ContactContent,
   HomeContent,
-  PlansContent
+  PlansContent,
+  RestaurantDashboardContent,
+  RestaurantEmployeesContent,
+  RestaurantOrderContent,
+  RestaurantPersonalizationContent,
+  RestaurantProductContent,
+  RestaurantStockContent,
+  UserProfileContent
 } from 'presentation/environment';
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
-import { CompanyAdminRoute, PublicRoute } from 'main/proxies';
-import { CompanyAdminTemplate, PublicTemplate } from 'presentation/atomic-component/template';
+import { Button } from '@mui/material';
+import { CompanyRoute, PublicRoute, RestaurantRoute } from 'main/proxies';
+import {
+  CompanyTemplate,
+  PublicTemplate,
+  RestaurantTemplate
+} from 'presentation/atomic-component/template';
 import { Suspense } from 'react';
 import { routePaths } from 'main/config';
 import type { FC } from 'react';
@@ -27,19 +41,45 @@ const RouterConfig: FC = () => (
             <Route element={<AboutUsContent />} path={routePaths.aboutUs} />
             <Route element={<ContactContent />} path={routePaths.contact} />
             <Route element={<PlansContent />} path={routePaths.plans} />
-            <Route element={<CompanyContent />} path={routePaths.companyUrl} />
           </Route>
         </Route>
 
-        {/* Private routes */}
-        <Route element={<CompanyAdminRoute />}>
-          <Route element={<CompanyAdminTemplate />}>
-            <Route element={<CompanyAdminContent />} path={routePaths.companyAdminUrl} />
+        {/* Company Private routes */}
+        <Route element={<CompanyRoute />}>
+          <Route element={<CompanyTemplate />}>
+            <Route element={<CompanyContent />} path={routePaths.companyUrl} />
+            <Route element={<CompanyEmployeesContent />} path={routePaths.companyEmployees} />
+            <Route element={<CompanyRestaurantsContent />} path={routePaths.companyRestaurants} />
+            <Route element={<CompanySubscriptionContent />} path={routePaths.companySubscription} />
+            <Route element={<UserProfileContent />} path={routePaths.companyUserProfile} />
+          </Route>
+        </Route>
+
+        {/* Restaurant Private routes */}
+        <Route element={<RestaurantRoute />}>
+          <Route element={<RestaurantTemplate />}>
+            <Route element={<RestaurantOrderContent />} path={routePaths.restaurantOrder} />
+            <Route element={<RestaurantProductContent />} path={routePaths.restaurantProduct} />
+            <Route element={<RestaurantStockContent />} path={routePaths.restaurantStock} />
+            <Route element={<RestaurantDashboardContent />} path={routePaths.restaurantDashboard} />
+            <Route element={<RestaurantEmployeesContent />} path={routePaths.restaurantEmployees} />
+            <Route element={<UserProfileContent />} path={routePaths.restaurantUserProfile} />
+            <Route
+              element={<RestaurantPersonalizationContent />}
+              path={routePaths.restaurantPersonalization}
+            />
           </Route>
         </Route>
 
         <Route>
-          <Route element={<> </>} path={'*'} />
+          <Route
+            element={
+              <div className={'flex flex-col gap-2 items-center justify-center w-full h-screen'}>
+                Not Found <Button onClick={(): void => window.history.back()}>go back</Button>
+              </div>
+            }
+            path={'*'}
+          />
         </Route>
       </Routes>
     </Suspense>

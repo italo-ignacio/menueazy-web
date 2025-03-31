@@ -3,16 +3,27 @@ import type { FC, ReactNode } from 'react';
 
 interface MenuItemProps {
   children?: ReactNode;
+  endElement?: ReactNode;
   className?: string;
-  hideGoBack?: boolean;
+  showGoBack?: boolean;
   title: string;
 }
 
-export const MainDiv: FC<MenuItemProps> = ({ children, hideGoBack, className, title }) => (
+export const MainDiv: FC<MenuItemProps> = ({
+  children,
+  showGoBack,
+  className,
+  endElement,
+  title
+}) => (
   <div className={`flex flex-col gap-6 desktop:gap-10 ${className}`}>
     <div className={'flex flex-col items-start gap-5'}>
-      {hideGoBack ? null : <GoBack />}
-      <h2 className={'text-primary text-2xl font-semibold'}>{title}</h2>
+      {showGoBack ? <GoBack /> : null}
+
+      <div className={'flex justify-between w-full items-center h-10'}>
+        <h2 className={'text-primary text-2xl font-semibold'}>{title}</h2>
+        {endElement}
+      </div>
     </div>
 
     {children}

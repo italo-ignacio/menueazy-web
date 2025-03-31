@@ -7,10 +7,20 @@ export enum routePaths {
   plans = '/plans',
   contact = '/contact',
 
-  companyAdminUrl = '/company/:companyUrl/admin',
   companyUrl = '/company/:companyUrl',
+  companyEmployees = '/company/:companyUrl/employees',
+  companyRestaurants = '/company/:companyUrl/restaurants',
+  companySubscription = '/company/:companyUrl/subscription',
+  companyUserProfile = '/company/:companyUrl/profile',
 
-  restaurantAdminUrl = '/restaurant/:restaurantUrl/admin',
+  restaurantDashboard = '/restaurant/:restaurantUrl/dashboard',
+  restaurantOrder = '/restaurant/:restaurantUrl/order',
+  restaurantProduct = '/restaurant/:restaurantUrl/product',
+  restaurantStock = '/restaurant/:restaurantUrl/stock',
+  restaurantEmployees = '/restaurant/:restaurantUrl/employees',
+  restaurantPersonalization = '/restaurant/:restaurantUrl/personalization',
+  restaurantUserProfile = '/restaurant/:restaurantUrl/profile',
+
   restaurantUrl = '/restaurant/:restaurantUrl'
 }
 
@@ -21,10 +31,20 @@ export const paths = {
   plans: '/plans',
   contact: '/contact',
 
-  companyAdminUrl: (companyUrl: string): string => `/company/${companyUrl}/admin`,
-  companyUrl: (companyUrl: string): string => `/company/${companyUrl}`,
+  companyUrl: (url: string): string => `/company/${url}`,
+  companyEmployees: (url: string): string => `/company/${url}/employees`,
+  companyRestaurants: (url: string): string => `/company/${url}/restaurants`,
+  companySubscription: (url: string): string => `/company/${url}/subscription`,
+  companyUserProfile: (url: string): string => `/company/${url}/profile`,
 
-  restaurantAdminUrl: (restaurantUrl: string): string => `/restaurant/${restaurantUrl}/admin`,
+  restaurantDashboard: (url: string): string => `/restaurant/${url}/dashboard`,
+  restaurantOrder: (url: string): string => `/restaurant/${url}/order`,
+  restaurantProduct: (url: string): string => `/restaurant/${url}/product`,
+  restaurantStock: (url: string): string => `/restaurant/${url}/stock`,
+  restaurantEmployees: (url: string): string => `/restaurant/${url}/employees`,
+  restaurantPersonalization: (url: string): string => `/restaurant/${url}/personalization`,
+  restaurantUserProfile: (url: string): string => `/restaurant/${url}/profile`,
+
   restaurantUrl: (restaurantUrl: string): string => `/restaurant/${restaurantUrl}`
 };
 
@@ -32,9 +52,11 @@ export const apiPaths = {
   default: '/default',
 
   checkUserCompany: '/user/check-company',
+  checkUserRestaurant: '/user/check-restaurant',
 
-  preUserLogin: '/auth/pre-user-login',
-  userLogin: '/auth/user-login',
+  userLogin: '/auth/user/login',
+  clientLogin: '/auth/client/login',
 
+  restaurant: '/restaurant',
   user: '/user'
 };

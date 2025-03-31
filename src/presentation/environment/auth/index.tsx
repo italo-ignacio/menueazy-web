@@ -1,4 +1,4 @@
-import { LoginForm } from 'presentation/atomic-component/molecule/form';
+import { UserLoginForm } from 'presentation/atomic-component/molecule/form';
 import { useTranslation } from 'react-i18next';
 import type { FC } from 'react';
 
@@ -17,7 +17,7 @@ export const AuthContent: FC = () => {
       </div>
 
       <div className={'flex flex-col w-full px-5 tablet:max-w-[600px] laptop:mt-9'}>
-        <LoginForm />
+        <UserLoginForm />
       </div>
     </div>
   );

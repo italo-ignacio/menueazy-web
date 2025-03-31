@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-restricted-imports */
+import { AnimatedBg } from '../animated-bg';
 import { ArrowDropDown, Check } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import { type FC, type ReactNode, useState } from 'react';
@@ -20,13 +21,13 @@ const languageName = {
 
 const currencyByLang = {
   en: 'USD',
-  es: 'MXN',
+  es: 'EUR',
   pt: 'BRL'
 } as const;
 
 const currencyName = {
   BRL: 'BRL R$',
-  MXN: 'MXN $',
+  EUR: 'EUR $',
   USD: 'USD $'
 };
 
@@ -44,9 +45,10 @@ export const SelectLanguage: FC = () => {
   const languageItem = (lang: Langs, openElement?: boolean): ReactNode => {
     if (openElement)
       return (
-        <div
+        <AnimatedBg
+          bg={'black'}
           className={
-            'flex gap-1 border px-1 min-h-[36px] cursor-pointer items-center min-w-[135px]'
+            'flex gap-1 border rounded px-1 min-h-[36px] cursor-pointer items-center min-w-[135px]'
           }
         >
           <img alt={lang} height={30} src={`/${lang}-flag.png`} width={30} />
@@ -55,13 +57,14 @@ export const SelectLanguage: FC = () => {
           <span className={'ml-auto'}>
             <ArrowDropDown />
           </span>
-        </div>
+        </AnimatedBg>
       );
 
     return (
-      <div
-        className={`flex gap-3 border p-1 px-4 cursor-pointer items-center min-w-[190px] 
-          min-h-10 ${lang === language?.slice(0, 2) ? 'bg-primary/20 text-primary' : 'hover:bg-gray-150'}`}
+      <AnimatedBg
+        bg={'black'}
+        className={`flex gap-3 border p-1 px-4 cursor-pointer items-center min-w-[190px] min-h-10 
+          ${lang === language?.slice(0, 2) ? 'bg-primary/20 hover:bg-primary/20 animate-rotate text-primary dark:text-white' : ''}`}
         onClick={(): void => {
           if (lang !== language?.slice(0, 2)) {
             changeLanguage(lang);
@@ -78,18 +81,21 @@ export const SelectLanguage: FC = () => {
             <Check />
           </span>
         ) : null}
-      </div>
+      </AnimatedBg>
     );
   };
 
   const currencyItem = (curren: CurrencyCode): ReactNode => {
     return (
-      <div
-        className={`flex gap-3 border p-1 px-4 cursor-pointer items-center min-w-[186px] min-h-10 
-          ${curren === currency ? 'bg-primary/20 text-primary' : 'hover:bg-gray-150'}
-          `}
+      <AnimatedBg
+        bg={'black'}
+        className={`flex gap-3 border p-1 px-4 cursor-pointer items-center min-w-[190px] min-h-10 
+          ${curren === currency ? 'bg-primary/20 hover:bg-primary/20 animate-rotate text-primary dark:text-white' : ''}`}
         onClick={(): void => {
           if (curren !== currency) dispatch(setCurrency(curren));
+        }}
+        style={{
+          backgroundSize: '150% 150%'
         }}
       >
         {currencyName[curren]}
@@ -99,7 +105,7 @@ export const SelectLanguage: FC = () => {
             <Check />
           </span>
         ) : null}
-      </div>
+      </AnimatedBg>
     );
   };
 
@@ -122,7 +128,7 @@ export const SelectLanguage: FC = () => {
           <h2 className={'text-lg font-semibold mb-1'}>{t('selectCurrency')}</h2>
           {currencyItem('USD')}
           {currencyItem('BRL')}
-          {currencyItem('MXN')}
+          {currencyItem('EUR')}
         </div>
       </div>
 

@@ -2,7 +2,9 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { Menu } from '@mui/material';
 import { MoreVert } from '@mui/icons-material';
+import { colors } from 'presentation/style';
 import { useEffect, useState } from 'react';
+import { useTheme } from 'data/hooks';
 import type { Dispatch, FC, MouseEvent, ReactNode, SetStateAction } from 'react';
 
 interface SimpleMenuProps {
@@ -26,6 +28,8 @@ export const SimpleMenu: FC<SimpleMenuProps> = ({
   const itemId = id
     ? `open-menu-element-${id}`
     : `open-menu-element-${String(Math.random() * 1000).replace('.', '')}`;
+
+  const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
@@ -119,9 +123,10 @@ export const SimpleMenu: FC<SimpleMenuProps> = ({
         }}
         PaperProps={{
           sx: {
-            backgroundColor: 'white',
+            backgroundColor: theme === 'light' ? 'white' : colors.gray[800],
             borderRadius: '10px',
-            boxShadow: '0px 0px 12px 2px #00000021'
+            boxShadow: '0px 0px 12px 2px #00000021',
+            color: theme === 'light' ? 'black' : 'white'
           }
         }}
         anchorEl={anchorEl}

@@ -3,5 +3,9 @@
   "loading": "Loading",
   "selectCurrency": "Select Currenct",
   "selectLanguage": "Select language",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "profile": "Profile",
+  "stock": "Stock",
+  "personalization": "Personalization",
+  "settings": "Settings"
 }

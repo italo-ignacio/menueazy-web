@@ -4,10 +4,14 @@ import { dimensions } from 'main/config';
 import { useWindowDimensions } from 'data/hooks';
 import type { FC } from 'react';
 
-export const Sidebar: FC = () => {
+interface LaptopSidebarProps {
+  type: 'company' | 'restaurant';
+}
+
+export const Sidebar: FC<LaptopSidebarProps> = ({ type }) => {
   const { width } = useWindowDimensions();
 
-  if (width >= dimensions.laptop) return <LaptopSidebar />;
+  if (width >= dimensions.laptop) return <LaptopSidebar type={type} />;
 
-  return <MobileSidebar />;
+  return <MobileSidebar type={type} />;
 };

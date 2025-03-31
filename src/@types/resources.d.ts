@@ -19,14 +19,58 @@ interface Resources {
     "loading": "Carregando",
     "selectCurrency": "Selecione a moeda",
     "selectLanguage": "Selecione o idioma",
-    "confirm": "Confirmar"
+    "confirm": "Confirmar",
+    "profile": "Perfil",
+    "stock": "Estoque",
+    "personalization": "Personalização",
+    "rightsReserved": "Todos os Direitos Reservados",
+    "settings": "configurações"
+  },
+  "company": {
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "restaurant": {
+      "title": "Resturantes"
+    },
+    "employees": {
+      "title": "Funcionarios"
+    },
+    "subscription": {
+      "title": "Minha assinatura"
+    },
+    "profile": {
+      "title": "Meu perfil"
+    }
   },
   "contact": {
     "title": "Entre em Contato"
   },
+  "entity": {
+    "registerRequest": "Solicitação de registro",
+    "subscription": "Assinatura",
+    "user": "Usuário",
+    "restaurant": "Restaurante",
+    "restaurants": "Restaurantes",
+    "style": "Estilo",
+    "table": "Mesa",
+    "product": "Produto",
+    "productOptionGroup": "Grupo de opções de produto",
+    "productOptionItem": "Item do grupo do produto",
+    "address": "Endereço",
+    "order": "Pedido",
+    "deliveryPerson": "Entregador",
+    "employee": "Funcionário",
+    "employees": "Funcionários",
+    "company": "Empresa",
+    "plan": "Plano",
+    "productImage": "Imagem do produto",
+    "category": "Categoria"
+  },
   "errors": {
     "requestError": "Ocorreu um erro na requisição",
-    "invalidCredential": "E-mail e/ou senha inválidos"
+    "invalidCredential": "E-mail e/ou senha inválidos",
+    "notFound": "não encontrado"
   },
   "header": {
     "aboutUs": "Sobre Nós",

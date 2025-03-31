@@ -10,6 +10,7 @@ interface SidebarItemProps {
   onClick?: () => Promise<void> | void;
   link?: To;
   isMobile?: boolean;
+  size?: 'large' | 'small';
   active?: boolean;
 }
 
@@ -19,6 +20,7 @@ export const SidebarItem: FC<SidebarItemProps> = ({
   title,
   isMobile,
   active,
+  size = 'small',
   onClick
 }) => {
   const { open, setOpen } = useSidebar();
@@ -54,12 +56,14 @@ export const SidebarItem: FC<SidebarItemProps> = ({
     );
   };
 
+  const gap = size === 'small' ? 'tablet:px-4' : 'py-2 tablet:px-4 tablet:py-3';
+
   if (link)
     return (
-      <Link className={'w-full tablet:px-4'} to={link}>
+      <Link className={`w-full ${gap}`} to={link}>
         {getElement()}
       </Link>
     );
 
-  return <div className={'w-full py-2 tablet:px-4 tablet:py-3'}>{getElement()}</div>;
+  return <div className={`w-full ${gap}`}>{getElement()}</div>;
 };

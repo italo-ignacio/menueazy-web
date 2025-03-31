@@ -1,0 +1,21 @@
+{
+  "dashboard": {
+    "title": "Dashboard"
+  },
+
+  "restaurant": {
+    "title": "Resturantes"
+  },
+
+  "employees": {
+    "title": "Funcionarios"
+  },
+
+  "subscription": {
+    "title": "Minha assinatura"
+  },
+
+  "profile": {
+    "title": "Meu perfil"
+  }
+}

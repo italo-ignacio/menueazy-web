@@ -17,6 +17,7 @@ export * from './random';
 export * from './update-hash';
 export * from './remove-accents';
 export * from './adjusted-date';
+export * from './params';
 export * from './filter';
 export * from './click-element-by-id';
 export * from './void-function';

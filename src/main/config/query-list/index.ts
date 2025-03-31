@@ -1,6 +1,7 @@
-export type QueryList = 'default' | 'user';
+export type QueryList = 'default' | 'restaurant' | 'user';
 
 export enum QueryName {
   default = 'default',
-  user = 'user'
+  user = 'user',
+  restaurant = 'restaurant'
 }

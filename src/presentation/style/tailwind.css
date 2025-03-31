@@ -43,6 +43,7 @@
   font-weight: 700;
   src: url('./assets/nunito-bold-italic.ttf') format('truetype');
 }
+
 * {
   font-family: 'Nunito';
 }
@@ -86,5 +87,17 @@ html {
 @keyframes blink {
   50% {
     opacity: 0;
+  }
+}
+
+@keyframes animation {
+  0% {
+    background-position: 10% 0%;
+  }
+  50% {
+    background-position: 91% 100%;
+  }
+  100% {
+    background-position: 10% 0%;
   }
 }

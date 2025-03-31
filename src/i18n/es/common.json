@@ -3,5 +3,7 @@
   "foo_others": "{{count}} apples",
   "selectCurrency": "Selecione a moeda",
   "selectLanguage": "Selecione o idioma",
+  "stock": "Estoque",
+  "personalization": "Personalização",
   "confirm": "Confirmar"
 }

@@ -1,11 +1,11 @@
 import { type FC, useState } from 'react';
-import { FormButton, GoogleLogin, InputController } from 'presentation/atomic-component/atom';
+import { FormButton, InputController } from 'presentation/atomic-component/atom';
 import { IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useLogin } from 'data/use-case';
 import { useTranslation } from 'react-i18next';
+import { useUserLogin } from 'data/use-case';
 
-export const LoginForm: FC = () => {
+export const UserLoginForm: FC = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { t } = useTranslation('auth');
@@ -15,7 +15,7 @@ export const LoginForm: FC = () => {
     onSubmit,
     control,
     formState: { isSubmitting }
-  } = useLogin();
+  } = useUserLogin();
 
   return (
     <form className={'flex flex-col gap-5 w-full'} onSubmit={handleSubmit(onSubmit)}>
@@ -50,8 +50,6 @@ export const LoginForm: FC = () => {
           loadingText={t('loading', { ns: 'common' })}
         />
       </div>
-
-      <GoogleLogin />
     </form>
   );
 };

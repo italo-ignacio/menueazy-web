@@ -1,0 +1,17 @@
+{
+  "registerRequest": "Solicitação de registro",
+  "subscription": "Subscription",
+  "user": "User",
+  "restaurant": "Restaurant",
+  "style": "Style",
+  "table": "Table",
+  "product": "Product",
+  "productOptionGroup": "Product options group",
+  "productOptionItem": "Item of options group",
+  "plan": "Plan",
+  "order": "Order",
+  "productImage": "Product image",
+  "deliveryPerson": "Delivery person",
+  "address": "Address",
+  "category": "Category"
+}

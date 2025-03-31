@@ -27,7 +27,6 @@ export interface LabelInputProps
     | 'ref'
     | 'size'
     | 'sx'
-    | 'value'
   > {
   id?: string;
   register?: UseFormRegisterReturn;
@@ -42,6 +41,7 @@ export interface LabelInputProps
   disabled?: boolean;
   autoFocus?: boolean;
   maxWidth?: number | string;
+  value?: string;
   children?: ReactNode;
   error?: boolean;
   errorMessage?: string;

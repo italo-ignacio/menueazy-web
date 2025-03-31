@@ -34,5 +34,5 @@ export const useFindQuery = <T>({
         queryParams: { limit, page, ...params },
         route: apiRoute ?? apiPaths[route ?? 'default']
       }),
-    { initialData: { firstLoading: true }, retry }
+    { initialData: { content: [], firstLoading: true }, retry }
   );

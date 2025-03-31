@@ -4,19 +4,31 @@ import type { Role } from 'domain/enums';
 export interface LoginPayload {
   accessToken: string;
   user: User;
+  client: Client;
 }
 
 export interface User {
   id: number;
-  firebaseId: string;
   name: string;
   email: string;
+  phone: string;
   role: Role;
   company: {
     id: number;
     name: string;
     companyUrl: string;
   };
+  createdAt: Date;
+  updatedAt: Date | null;
+  finishedAt: Date | null;
+}
+
+export interface Client {
+  id: number;
+  firebaseId: string;
+  name: string;
+  email: string;
+  phone: string;
   createdAt: Date;
   updatedAt: Date | null;
   finishedAt: Date | null;

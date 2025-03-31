@@ -1,0 +1,21 @@
+{
+  "registerRequest": "Solicitação de registro",
+  "subscription": "Assinatura",
+  "user": "Usuário",
+  "restaurant": "Restaurante",
+  "restaurants": "Restaurantes",
+  "style": "Estilo",
+  "table": "Mesa",
+  "product": "Produto",
+  "productOptionGroup": "Grupo de opções de produto",
+  "productOptionItem": "Item do grupo do produto",
+  "address": "Endereço",
+  "order": "Pedido",
+  "deliveryPerson": "Entregador",
+  "employee": "Funcionário",
+  "employees": "Funcionários",
+  "company": "Empresa",
+  "plan": "Plano",
+  "productImage": "Imagem do produto",
+  "category": "Categoria"
+}

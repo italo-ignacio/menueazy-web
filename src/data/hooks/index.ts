@@ -4,5 +4,8 @@ export * from './use-pagination';
 export * from './use-path';
 export * from './use-search';
 export * from './use-window-dimensions';
+export * from './use-theme';
 export * from './use-infinite-scroll';
+export * from './use-company';
+export * from './use-restaurant';
 export * from './use-redux-pagination';

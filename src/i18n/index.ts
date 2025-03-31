@@ -3,9 +3,9 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import i18n from 'i18next';
 
-import { enTranslation } from './en/@index';
-import { esTranslation } from './es/@index';
-import { ptTranslation } from './pt/@index';
+import { enTranslation } from './en';
+import { esTranslation } from './es';
+import { ptTranslation } from './pt';
 
 export const LANGUAGE_STORAGE_KEY = 'app_language';
 

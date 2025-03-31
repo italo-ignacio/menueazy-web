@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom';
 import { MainDiv } from 'presentation/atomic-component/atom';
-import { paths } from 'main/config';
+import { useTranslation } from 'react-i18next';
 import type { FC } from 'react';
 
 export const CompanyContent: FC = () => {
+  const { t } = useTranslation('company');
+
   return (
-    <MainDiv title={'Controle de Usuários'}>
+    <MainDiv title={t('dashboard.title')}>
       <div className={'flex flex-col border border-input-border-2 rounded'}>Company</div>
-      <Link to={paths.companyAdminUrl('menu-eazy')}>sasa</Link>
     </MainDiv>
   );
 };

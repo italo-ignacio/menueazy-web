@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpStatusCode } from 'domain/enums';
+import { LANGUAGE_STORAGE_KEY } from 'i18n';
 import { removeUndefined } from 'main/utils';
 import { store } from 'store';
 import type { ApiProps } from 'domain/protocol';
@@ -13,6 +14,10 @@ export const fetchApi = async <T>(params: ApiProps): Promise<T> => {
   const headers = {};
 
   if (accessToken) Object.assign(headers, { Authorization: `Bearer ${accessToken}` });
+
+  const lang = localStorage.getItem(LANGUAGE_STORAGE_KEY);
+
+  if (lang) Object.assign(headers, { Lang: lang });
 
   if (!params.isFormData)
     Object.assign(headers, { 'Content-Type': 'application/json;charset=UTF-8' });

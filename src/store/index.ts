@@ -1,4 +1,4 @@
-import { cHReducer } from './first-access/slice';
+import { aReducer } from './access/slice';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { filterReducer } from './filters/slice';
 import { persistReducer, persistStore } from 'redux-persist';
@@ -17,7 +17,7 @@ const persistConfig = {
 const persisted = persistReducer(persistConfig, persistedReducer);
 
 const rootReducer = combineReducers({
-  cH: cHReducer,
+  a: aReducer,
   filter: filterReducer,
   persist: persisted,
   sidebar: sidebarReducer

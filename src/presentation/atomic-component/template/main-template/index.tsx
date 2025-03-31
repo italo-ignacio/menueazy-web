@@ -1,6 +1,6 @@
 import { type FC, useEffect } from 'react';
-import { PrivateFooter, PrivateHeader, Sidebar } from 'presentation/atomic-component/organism';
 import { Outlet, useLocation } from 'react-router-dom';
+import { PrivateFooter, PrivateHeader, Sidebar } from 'presentation/atomic-component/organism';
 import { dimensions } from 'main/config';
 import { useAppSelector } from 'store';
 import { useWindowDimensions } from 'data/hooks';
@@ -35,7 +35,7 @@ export const MainTemplate: FC = () => {
       <PrivateHeader />
 
       <main className={'flex w-full '} style={{ minHeight: getHeight() }}>
-        <Sidebar />
+        <Sidebar type={'company'} />
 
         <div
           className={
