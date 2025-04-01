@@ -10,6 +10,7 @@ export interface useFindQueryProps {
   params?: object;
   apiRoute?: string;
   retry?: number;
+  hideId?: number;
   id?: string;
 }
 
@@ -22,6 +23,7 @@ export const useFindQuery = <T>({
   params,
   apiRoute,
   id,
+  hideId,
   retry,
   limit,
   route
@@ -30,7 +32,7 @@ export const useFindQuery = <T>({
     [QueryName[route ?? 'default'], id, limit, page, Object.values(params ?? {})],
     () =>
       api.get({
-        id: apiRoute ? undefined : id,
+        id: hideId ? undefined : id,
         queryParams: { limit, page, ...params },
         route: apiRoute ?? apiPaths[route ?? 'default']
       }),

@@ -132,7 +132,6 @@ export const Select: FC<SelectProps> = ({
         onChangeCapture={(event: any): void => {
           if (props.onSearch) props.onSearch((event.target?.value as string) ?? '');
         }}
-        openText={'Abrir'}
         options={options}
         renderInput={({ InputProps, ...params }): ReactNode => {
           const { ...rest } = InputProps;

@@ -3,6 +3,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { filterReducer } from './filters/slice';
 import { persistReducer, persistStore } from 'redux-persist';
 import { persistReducer as persistedReducer } from './persist/slice';
+import { productReducer } from './product/slice';
 import { sidebarReducer } from './sidebar/slice';
 import { useSelector } from 'react-redux';
 import storage from 'redux-persist/lib/storage';
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   a: aReducer,
   filter: filterReducer,
   persist: persisted,
+  product: productReducer,
   sidebar: sidebarReducer
 });
 

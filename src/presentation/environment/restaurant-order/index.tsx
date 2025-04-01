@@ -1,10 +1,13 @@
 import { MainDiv } from 'presentation/atomic-component/atom';
+import { useTranslation } from 'react-i18next';
 import type { FC } from 'react';
 
 export const RestaurantOrderContent: FC = () => {
+  const { t } = useTranslation('restaurant');
+
   return (
-    <MainDiv title={'Controle de Usuários'}>
-      <div className={'flex flex-col border border-input-border-2 rounded'}>Restaurant order</div>
+    <MainDiv title={t('order.title')}>
+      <div className={'flex flex-col'} />
     </MainDiv>
   );
 };

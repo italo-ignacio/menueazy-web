@@ -31,7 +31,7 @@ export const CompanyTemplate: FC = () => {
   };
 
   return (
-    <div className={'flex flex-col min-h-dvh max-w-[100dvw] h-full'} id={'main'}>
+    <div className={'flex flex-col min-h-dvh max-w-[100dvw] h-full bg-gray-100'} id={'main'}>
       <PrivateHeader />
 
       <main className={'flex w-full '} style={{ minHeight: getHeight() }}>

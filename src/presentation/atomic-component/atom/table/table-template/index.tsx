@@ -10,9 +10,10 @@ interface TableTemplateProps {
 export const TableTemplate: FC<TableTemplateProps> = ({ tableHeader, tableBody, height }) => {
   return (
     <TableContainer
-      className={'overflow-auto'}
+      className={'overflow-auto bg-white'}
       sx={{
-        height: height ?? '98%'
+        height: height ?? '98%',
+        padding: '4px'
       }}
     >
       <Table

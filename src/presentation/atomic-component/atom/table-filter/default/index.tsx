@@ -1,11 +1,10 @@
-import { FilterAlt } from '@mui/icons-material';
+import { Close, FilterAlt } from '@mui/icons-material';
 import { GenericFilter } from 'presentation/atomic-component/atom/generic-filter';
 import { IconButton } from '@mui/material';
 import { Menu } from 'presentation/atomic-component/atom/menu';
 import { SortFilter } from 'presentation/atomic-component/atom/sort-filter';
 import { useState } from 'react';
 import { voidFunction } from 'main/utils';
-import CloseIcon from '@mui/icons-material/Close';
 import type { FC } from 'react';
 import type { TableSortFilter } from 'store/filters/slice';
 
@@ -67,7 +66,7 @@ export const TableFilter: FC<TableFilterProps> = ({
               }}
               title={'Fechar'}
             >
-              <CloseIcon className={'hover:cursor-pointer text-gray-500'} />
+              <Close className={'hover:cursor-pointer text-gray-500'} />
             </IconButton>
           </div>
 

@@ -8,6 +8,8 @@ import errors from './errors.json';
 import header from './header.json';
 import home from './home.json';
 import plans from './plans.json';
+import restaurant from './restaurant.json';
+import user from './user.json';
 
 export const ptTranslation = {
   aboutUs,
@@ -19,5 +21,7 @@ export const ptTranslation = {
   errors,
   header,
   home,
-  plans
+  plans,
+  restaurant,
+  user
 };

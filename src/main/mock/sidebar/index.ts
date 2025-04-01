@@ -18,19 +18,19 @@ const companyDashboard = (url: string): item => ({
 const companyRestaurants = (url: string): item => ({
   icon: 'Store',
   link: paths.companyRestaurants(url),
-  name: t('restaurants', { ns: 'entity' })
+  name: t('restaurant.title', { ns: 'company' })
 });
 
 const companyEmployees = (url: string): item => ({
   icon: 'People',
   link: paths.companyEmployees(url),
-  name: t('employees', { ns: 'entity' })
+  name: t('employees.title', { ns: 'company' })
 });
 
 const companySubscription = (url: string): item => ({
   icon: 'Star',
   link: paths.companySubscription(url),
-  name: t('subscription', { ns: 'entity' })
+  name: t('subscription.title', { ns: 'company' })
 });
 
 const restaurantDashboard = (url: string): item => ({
@@ -42,31 +42,31 @@ const restaurantDashboard = (url: string): item => ({
 const restaurantOrder = (url: string): item => ({
   icon: 'Sell',
   link: paths.restaurantOrder(url),
-  name: t('order', { ns: 'entity' })
+  name: t('order.title', { ns: 'restaurant' })
 });
 
 const restaurantProduct = (url: string): item => ({
   icon: 'ShoppingCart',
   link: paths.restaurantProduct(url),
-  name: t('product', { ns: 'entity' })
+  name: t('product.title', { ns: 'restaurant' })
 });
 
 const restaurantStock = (url: string): item => ({
   icon: 'Inventory',
   link: paths.restaurantStock(url),
-  name: t('stock', { ns: 'common' })
+  name: t('stock.title', { ns: 'restaurant' })
 });
 
 const restaurantEmployees = (url: string): item => ({
   icon: 'People',
   link: paths.restaurantEmployees(url),
-  name: t('employees', { ns: 'entity' })
+  name: t('employees.title', { ns: 'restaurant' })
 });
 
 const restaurantPersonalization = (url: string): item => ({
   icon: 'FormatColorFill',
   link: paths.restaurantPersonalization(url),
-  name: t('personalization', { ns: 'common' })
+  name: t('personalization.title', { ns: 'restaurant' })
 });
 
 interface sidebarItemsProps {

@@ -5,4 +5,5 @@ export interface Pagination {
 
 export interface FilterPagination {
   page: number;
+  limit?: number;
 }

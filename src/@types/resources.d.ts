@@ -22,6 +22,9 @@ interface Resources {
     "confirm": "Confirmar",
     "profile": "Perfil",
     "stock": "Estoque",
+    "showing": "Exibindo",
+    "from": "de",
+    "apply": "Aplicar",
     "personalization": "Personalização",
     "rightsReserved": "Todos os Direitos Reservados",
     "settings": "configurações"
@@ -38,9 +41,6 @@ interface Resources {
     },
     "subscription": {
       "title": "Minha assinatura"
-    },
-    "profile": {
-      "title": "Meu perfil"
     }
   },
   "contact": {
@@ -161,6 +161,60 @@ interface Resources {
   },
   "plans": {
     "title": "Planos"
+  },
+  "restaurant": {
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "order": {
+      "title": "Pedidos"
+    },
+    "product": {
+      "title": "Produtos",
+      "filter": {
+        "search": "Pesquisar",
+        "name": "Filtro",
+        "export": "Exportar",
+        "newProduct": "Novo Produto",
+        "items_one": "{{count}} item",
+        "items_other": "{{count}} items"
+      },
+      "statistics": {
+        "paymentSuccess": "Pedidos finalizadas",
+        "paymentCanceled": "Pedidos canceladas",
+        "totalCustomer": "Total de clientes",
+        "totalOrders": "Total de pedidos"
+      },
+      "table": {
+        "name": "Nome do produto",
+        "price": "Preço",
+        "inStock": "Em estoque",
+        "published": "Publicado",
+        "highlight": "Destaque",
+        "category": "Categorias",
+        "review": "Avaliações",
+        "massActions": "Ações em massa (produtos selecionados)",
+        "outOfStock": "Fora de estoque",
+        "publish": "Publicar",
+        "unpublish": "Despublica",
+        "removeHighlight": "Remover destaque",
+        "deleteProduct": "Deletar produtos"
+      }
+    },
+    "stock": {
+      "title": "Estoque"
+    },
+    "employees": {
+      "title": "Funcionários"
+    },
+    "personalization": {
+      "title": "Personalização"
+    }
+  },
+  "user": {
+    "profile": {
+      "title": "Meu perfil"
+    }
   }
 }
 

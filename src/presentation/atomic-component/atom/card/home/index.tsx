@@ -18,7 +18,7 @@ export const HomeCard: FC<HomeCardProps> = ({ title, image, to, onClick }) => {
     >
       <div
         className={
-          'flex flex-col w-full h-[265px] hover:border-2 transition-[margin] duration-300 hover:mb-[15px] hover:bg-primary/5 cursor-pointer gap-3 items-center justify-center border border-input-border-2 rounded'
+          'flex flex-col w-full h-[265px] hover:border-2 transition-[margin] duration-300 hover:mb-[15px] hover:bg-primary/5 cursor-pointer gap-3 items-center justify-center border border-gray-300 rounded'
         }
       >
         {typeof image === 'string' ? (

@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { Logo } from 'main/assets';
-import { SettingModal } from 'presentation/atomic-component/molecule/modal';
 import { ToggleMenu } from 'presentation/atomic-component/atom';
 import { getUser } from 'store/persist/selector';
 import { paths } from 'main/config';
@@ -20,7 +19,6 @@ export const PrivateHeader: FC = () => {
       </Link>
 
       <div className={'flex gap-3'}>
-        <SettingModal isOnHeader />
         <ToggleMenu />
       </div>
     </header>

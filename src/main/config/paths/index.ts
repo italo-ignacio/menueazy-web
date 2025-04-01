@@ -15,7 +15,11 @@ export enum routePaths {
 
   restaurantDashboard = '/restaurant/:restaurantUrl/dashboard',
   restaurantOrder = '/restaurant/:restaurantUrl/order',
+
   restaurantProduct = '/restaurant/:restaurantUrl/product',
+  restaurantProductId = '/restaurant/:restaurantUrl/product/:id',
+  restaurantProductEdit = '/restaurant/:restaurantUrl/product/:id/edit',
+
   restaurantStock = '/restaurant/:restaurantUrl/stock',
   restaurantEmployees = '/restaurant/:restaurantUrl/employees',
   restaurantPersonalization = '/restaurant/:restaurantUrl/personalization',
@@ -39,7 +43,12 @@ export const paths = {
 
   restaurantDashboard: (url: string): string => `/restaurant/${url}/dashboard`,
   restaurantOrder: (url: string): string => `/restaurant/${url}/order`,
+
   restaurantProduct: (url: string): string => `/restaurant/${url}/product`,
+  restaurantProductId: (url: string, id: number): string => `/restaurant/${url}/product/${id}`,
+  restaurantProductEdit: (url: string, id: number): string =>
+    `/restaurant/${url}/product/${id}/edit`,
+
   restaurantStock: (url: string): string => `/restaurant/${url}/stock`,
   restaurantEmployees: (url: string): string => `/restaurant/${url}/employees`,
   restaurantPersonalization: (url: string): string => `/restaurant/${url}/personalization`,
@@ -58,5 +67,8 @@ export const apiPaths = {
   clientLogin: '/auth/client/login',
 
   restaurant: '/restaurant',
+
+  product: (restaurantId: number): string => `/restaurant/${restaurantId}/product`,
+
   user: '/user'
 };

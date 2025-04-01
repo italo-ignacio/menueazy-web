@@ -14,12 +14,14 @@ interface SimpleMenuProps {
   openElement?: ReactNode;
   side?: 'bottom' | 'left' | 'right' | 'top';
   id?: string;
+  radius?: string;
 }
 
 export const SimpleMenu: FC<SimpleMenuProps> = ({
   children,
   isOpen,
   setIsOpen,
+  radius,
   id,
   side,
   openElement
@@ -124,7 +126,7 @@ export const SimpleMenu: FC<SimpleMenuProps> = ({
         PaperProps={{
           sx: {
             backgroundColor: theme === 'light' ? 'white' : colors.gray[800],
-            borderRadius: '10px',
+            borderRadius: radius ?? '10px',
             boxShadow: '0px 0px 12px 2px #00000021',
             color: theme === 'light' ? 'black' : 'white'
           }

@@ -6,7 +6,7 @@ interface MenuItemProps {
   endElement?: ReactNode;
   className?: string;
   showGoBack?: boolean;
-  title: string;
+  title?: string;
 }
 
 export const MainDiv: FC<MenuItemProps> = ({
@@ -17,14 +17,16 @@ export const MainDiv: FC<MenuItemProps> = ({
   title
 }) => (
   <div className={`flex flex-col gap-6 desktop:gap-10 ${className}`}>
-    <div className={'flex flex-col items-start gap-5'}>
-      {showGoBack ? <GoBack /> : null}
+    {title ? (
+      <div className={'flex flex-col items-start gap-5'}>
+        {showGoBack ? <GoBack /> : null}
 
-      <div className={'flex justify-between w-full items-center h-10'}>
-        <h2 className={'text-primary text-2xl font-semibold'}>{title}</h2>
-        {endElement}
+        <div className={'flex justify-between w-full items-center h-10'}>
+          <h2 className={'text-primary text-2xl font-semibold'}>{title}</h2>
+          {endElement}
+        </div>
       </div>
-    </div>
+    ) : null}
 
     {children}
   </div>

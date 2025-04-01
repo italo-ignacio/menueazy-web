@@ -14,6 +14,8 @@ import {
   RestaurantOrderContent,
   RestaurantPersonalizationContent,
   RestaurantProductContent,
+  RestaurantProductEditContent,
+  RestaurantProductIdContent,
   RestaurantStockContent,
   UserProfileContent
 } from 'presentation/environment';
@@ -59,7 +61,14 @@ const RouterConfig: FC = () => (
         <Route element={<RestaurantRoute />}>
           <Route element={<RestaurantTemplate />}>
             <Route element={<RestaurantOrderContent />} path={routePaths.restaurantOrder} />
+
             <Route element={<RestaurantProductContent />} path={routePaths.restaurantProduct} />
+            <Route element={<RestaurantProductIdContent />} path={routePaths.restaurantProductId} />
+            <Route
+              element={<RestaurantProductEditContent />}
+              path={routePaths.restaurantProductEdit}
+            />
+
             <Route element={<RestaurantStockContent />} path={routePaths.restaurantStock} />
             <Route element={<RestaurantDashboardContent />} path={routePaths.restaurantDashboard} />
             <Route element={<RestaurantEmployeesContent />} path={routePaths.restaurantEmployees} />

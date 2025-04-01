@@ -2,7 +2,6 @@ import { type FC, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from 'main/assets';
 import { Logout } from 'presentation/atomic-component/molecule';
-import { SettingModal } from 'presentation/atomic-component/molecule/modal';
 import { SidebarItem } from 'presentation/atomic-component/atom/sidebar-item';
 import { ToggleMenu } from 'presentation/atomic-component/atom';
 import { getUser } from 'store/persist/selector';
@@ -22,8 +21,8 @@ export const LaptopSidebar: FC<LaptopSidebarProps> = ({ type }) => {
   const { allPathname, lastPathname } = usePath();
   const { t } = useTranslation('common');
 
-  const { url: companyUrl } = useCompany();
-  const { url: restaurantUrl } = useRestaurant();
+  const { companyUrl } = useCompany();
+  const { restaurantUrl } = useRestaurant();
 
   const user = getUser();
 
@@ -52,7 +51,7 @@ export const LaptopSidebar: FC<LaptopSidebarProps> = ({ type }) => {
             const lastArray = link.split('/');
 
             if (allPathname.length === 2 && icon === 'Dashboard') active = true;
-            else if (allPathname.length > 2 && lastArray[lastArray.length - 1] === lastPathname)
+            else if (allPathname.length > 2 && lastArray[lastArray.length - 1] === allPathname[2])
               active = true;
 
             return (
@@ -78,7 +77,11 @@ export const LaptopSidebar: FC<LaptopSidebarProps> = ({ type }) => {
         ) : null}
       </div>
 
-      <div className={'flex flex-col gap-3'}>
+      <div
+        className={
+          'flex flex-col w-full items-center gap-2 pt-3 justify-start border-t border-gray-125'
+        }
+      >
         <SidebarItem
           active={lastPathname === 'profile'}
           iconName={'Person'}
@@ -87,13 +90,10 @@ export const LaptopSidebar: FC<LaptopSidebarProps> = ({ type }) => {
               ? paths.companyUserProfile(companyUrl)
               : paths.restaurantUserProfile(restaurantUrl)
           }
+          size={'small'}
           title={t('profile')}
         />
 
-        <SettingModal />
-      </div>
-
-      <div className={'flex w-full items-center gap-4 justify-start border-t border-gray-125'}>
         <Logout />
       </div>
     </div>

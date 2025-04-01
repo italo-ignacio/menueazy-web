@@ -1,0 +1,58 @@
+{
+  "dashboard": {
+    "title": "Dashboard"
+  },
+
+  "order": {
+    "title": "Pedidos"
+  },
+
+  "product": {
+    "title": "Produtos",
+
+    "filter": {
+      "search": "Pesquisar",
+      "name": "Filtro",
+      "export": "Exportar",
+      "newProduct": "Novo Produto",
+      "items_one": "{{count}} item",
+      "items_other": "{{count}} items"
+    },
+
+    "statistics": {
+      "paymentSuccess": "Pedidos finalizadas",
+      "paymentCanceled": "Pedidos canceladas",
+      "totalCustomer": "Total de clientes",
+      "totalOrders": "Total de pedidos"
+    },
+
+    "table": {
+      "name": "Nome do produto",
+      "price": "Preço",
+      "inStock": "Em estoque",
+      "published": "Publicado",
+      "highlight": "Destaque",
+      "category": "Categorias",
+      "review": "Avaliações",
+
+      "massActions": "Ações em massa (Produtos Selecionados)",
+      "outOfStock": "Fora de estoque",
+      "publish": "Publicar",
+      "unpublish": "Despublica",
+      "removeHighlight": "Remover destaque",
+      "deleteProduct": "Deletar produtos"
+    }
+  },
+
+  "stock": {
+    "title": "Estoque"
+  },
+
+  "employees": {
+    "title": "Funcionários"
+  },
+
+  "personalization": {
+    "title": "Personalização"
+  }
+}

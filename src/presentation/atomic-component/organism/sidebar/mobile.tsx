@@ -18,8 +18,8 @@ export const MobileSidebar: FC<MobileSidebarProps> = ({ type }) => {
   const { allPathname, lastPathname } = usePath();
   const { t } = useTranslation('common');
 
-  const { url: companyUrl } = useCompany();
-  const { url: restaurantUrl } = useRestaurant();
+  const { companyUrl } = useCompany();
+  const { restaurantUrl } = useRestaurant();
 
   const user = getUser();
 
@@ -36,7 +36,7 @@ export const MobileSidebar: FC<MobileSidebarProps> = ({ type }) => {
               const lastArray = link.split('/');
 
               if (allPathname.length === 2 && icon === 'Dashboard') active = true;
-              else if (allPathname.length > 2 && lastArray[lastArray.length - 1] === lastPathname)
+              else if (allPathname.length > 2 && lastArray[lastArray.length - 1] === allPathname[2])
                 active = true;
 
               return (
@@ -63,7 +63,7 @@ export const MobileSidebar: FC<MobileSidebarProps> = ({ type }) => {
           ) : null}
         </div>
 
-        <div className={'flex flex-col gap-3'}>
+        <div className={'flex flex-col pt-2 border-t'}>
           <SidebarItem
             active={lastPathname === 'profile'}
             iconName={'Person'}
@@ -73,11 +73,10 @@ export const MobileSidebar: FC<MobileSidebarProps> = ({ type }) => {
                 : paths.restaurantUserProfile(restaurantUrl)
             }
             onClick={(): void => setOpen(false)}
+            size={'large'}
             title={t('profile')}
           />
-        </div>
 
-        <div className={'border-t'}>
           <Logout />
         </div>
       </div>

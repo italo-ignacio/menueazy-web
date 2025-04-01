@@ -9,7 +9,7 @@ interface BodyCellProps extends Pick<TableCellProps, 'sx'> {
   title: ReactNode | number | string;
   className?: string;
   link?: string;
-  lastRow?: boolean;
+  firstRow?: boolean;
   colSpan?: number;
   width?: {
     small?: number;
@@ -28,7 +28,7 @@ export const BodyCell: FC<BodyCellProps> = ({
   clamp,
   width,
   link,
-  lastRow,
+  firstRow,
   backgroundColor,
   colSpan,
   sx,
@@ -53,8 +53,9 @@ export const BodyCell: FC<BodyCellProps> = ({
       scope={'row'}
       sx={{
         backgroundColor,
-        borderColor: lastRow ? 'transparent' : colors.gray[200],
-        padding: link ? '0' : '10px 18px',
+        borderBottom: '0px',
+        borderTop: firstRow ? undefined : `1px solid ${colors.gray[200]}`,
+        padding: link ? '0' : '12px 18px',
         ...sx
       }}
       title={typeof title === 'string' ? title : undefined}

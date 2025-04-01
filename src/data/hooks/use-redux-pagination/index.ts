@@ -4,11 +4,16 @@ import type { FilterSliceState } from 'store/filters/slice';
 export const useReduxPagination = (
   entity: keyof FilterSliceState
 ): {
-  handleChangePage: (event: unknown, newPage: number) => void;
+  handleChangePage: (newPage: number) => void;
+  handleChangeLimit: (newLimit: number) => void;
 } => {
-  const handleChangePage = (_event: unknown, newPage: number): void => {
+  const handleChangePage = (newPage: number): void => {
     setFilter(entity, { page: newPage });
   };
 
-  return { handleChangePage };
+  const handleChangeLimit = (newLimit: number): void => {
+    setFilter(entity, { limit: newLimit });
+  };
+
+  return { handleChangeLimit, handleChangePage };
 };
