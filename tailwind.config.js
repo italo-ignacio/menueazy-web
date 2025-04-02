@@ -15,7 +15,7 @@ export default {
     colors,
     extend: {
       boxShadow: {
-        base: '0px 8px 20px 0px rgba(0,0,0,0.1)'
+        base: '0px 12px 13px -8px rgba(0,0,0,0.04)'
       },
       backgroundImage: {
         'gradient-black': 'linear-gradient(90deg, #191A1B 19%, #363637 50%, #5D5D5D 79%)',

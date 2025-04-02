@@ -32,6 +32,7 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
         styleOverrides: {
           root: {
             borderRadius: '4px',
+            boxShadow: 'inset 0.1px 0.2px 0px 1px rgba(0,0,0,0.02) !important',
             color: 'white',
             fontSize: '16px',
             padding: '6px 16px',
@@ -44,7 +45,6 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             style: {
               ':hover': { backgroundColor: colors.gray[200] },
               backgroundColor: colors.gray[125],
-              boxShadow: '0',
               color: `${colors.gray[900]} !important`,
               svg: { color: colors.gray[900] }
             }
@@ -223,13 +223,19 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
               WebkitBoxShadow: '0 0 0 1000px transparent inset !important',
               transition: 'background-color 10000s ease-in-out'
             },
+            '.MuiInputAdornment-root': {
+              marginRight: 0
+            },
             '.MuiInputBase-input': {
-              paddingLeft: '14px !important'
+              paddingLeft: '8px !important'
             },
             '.MuiInputBase-root': {
               backgroundColor: 'white',
-              borderRadius: '4px'
-            }
+              borderRadius: '4px',
+              paddingLeft: '8px',
+              paddingRight: '4px'
+            },
+            boxShadow: '0px 12px 13px -8px rgba(0,0,0,0.04)'
           }
         }
         // variants: [
@@ -559,12 +565,17 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
                 color: 'white !important'
               }
             },
+            '.MuiInputAdornment-root': {
+              marginRight: 0
+            },
             '.MuiInputBase-input': {
-              paddingLeft: '14px !important'
+              paddingLeft: '8px !important'
             },
             '.MuiInputBase-root': {
               backgroundColor: colors.gray[700],
-              borderRadius: '4px'
+              borderRadius: '4px',
+              paddingLeft: '8px',
+              paddingRight: '4px'
             },
             svg: {
               color: 'white'

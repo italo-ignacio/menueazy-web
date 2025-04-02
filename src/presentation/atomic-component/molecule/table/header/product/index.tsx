@@ -1,6 +1,9 @@
 import { Checkbox, TableHead, TableRow } from '@mui/material';
 import { HeaderCell } from 'presentation/atomic-component/atom';
+import { SortFilter } from 'presentation/atomic-component/atom/sort-filter';
+import { TableSort } from 'presentation/atomic-component/atom/table-filter';
 import { addProduct, removeProduct } from 'store/product/slice';
+import { setSortFilter } from 'main/utils';
 import { useAppSelector } from 'store';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -29,7 +32,7 @@ export const ProductTableHeader: FC<ProductTableHeaderProps> = ({ query }) => {
             <div className={'flex items-center gap-3 relative'}>
               <div className={'absolute'}>
                 <Checkbox
-                  checked={items?.every((item) => productSelected[item.id])}
+                  checked={items?.length > 0 && items?.every((item) => productSelected[item.id])}
                   onChange={(event): void => {
                     if (event.target.checked) dispatch(addProduct(items));
                     else dispatch(removeProduct(items?.map((item) => item.id)));
@@ -37,18 +40,62 @@ export const ProductTableHeader: FC<ProductTableHeaderProps> = ({ query }) => {
                 />
               </div>
 
-              <span className={'ml-[50px]'}>{t('product.table.name')}</span>
+              <span className={'ml-[50px] flex gap-2'}>
+                {t('product.table.name')}{' '}
+                <SortFilter filterName={'name'} {...setSortFilter('product', 'name')} />
+              </span>
             </div>
           }
           width={'100%'}
         />
 
-        <HeaderCell minWidth={100} title={t('product.table.price')} />
-        <HeaderCell align={'center'} minWidth={120} title={t('product.table.published')} />
-        <HeaderCell align={'center'} minWidth={150} title={t('product.table.inStock')} />
-        <HeaderCell align={'center'} minWidth={120} title={t('product.table.highlight')} />
-        <HeaderCell minWidth={200} title={t('product.table.category')} />
-        <HeaderCell last minWidth={200} title={t('product.table.review')} />
+        <HeaderCell
+          minWidth={150}
+          title={
+            <TableSort
+              filterName={'price'}
+              sortItem={setSortFilter('product', 'price')}
+              title={t('product.table.price')}
+            />
+          }
+        />
+
+        <HeaderCell
+          minWidth={150}
+          title={
+            <TableSort
+              filterName={'published'}
+              sortItem={setSortFilter('product', 'published')}
+              title={t('product.table.published')}
+            />
+          }
+        />
+
+        <HeaderCell
+          minWidth={150}
+          title={
+            <TableSort
+              filterName={'inStock'}
+              sortItem={setSortFilter('product', 'inStock')}
+              title={t('product.table.inStock')}
+            />
+          }
+        />
+
+        <HeaderCell
+          minWidth={150}
+          title={
+            <TableSort
+              filterName={'highlight'}
+              sortItem={setSortFilter('product', 'highlight')}
+              title={t('product.table.highlight')}
+            />
+          }
+        />
+
+        {/* <HeaderCell minWidth={130} title={t('product.table.totalSold')} /> */}
+        <HeaderCell minWidth={210} title={t('product.table.review')} />
+        <HeaderCell minWidth={50} title={''} />
       </TableRow>
     </TableHead>
   );

@@ -19,7 +19,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    defaultNS: 'common',
+    defaultNS: 'restaurant',
     detection: {
       caches: ['localStorage'],
       lookupLocalStorage: LANGUAGE_STORAGE_KEY,

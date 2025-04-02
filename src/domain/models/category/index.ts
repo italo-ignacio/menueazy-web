@@ -25,5 +25,5 @@ export const categoryFilterInitialState: CategoryFilter = {
   page: 1,
   role: [],
   sort: null,
-  sortBy: null
+  orderBy: null
 };

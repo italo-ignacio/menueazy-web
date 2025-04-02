@@ -39,10 +39,10 @@ export const SidebarItem: FC<SidebarItemProps> = ({
       >
         <div
           className={
-            'flex w-full px-[9.5px] items-center h-[42px] gap-3 transition-[width] ease-in delay-75'
+            'flex w-full px-[12px] items-center h-[42px] gap-3 transition-[width] ease-in delay-75'
           }
         >
-          <IconRender name={iconName} sx={{ fontSize: '1.8rem' }} />
+          <IconRender name={iconName} sx={{ fontSize: '1.5rem' }} />
 
           <span
             className={`h-[1.5rem] font-semibold transition-[width,margin] duration-100 ease-in-out overflow-hidden truncate cursor-pointer ${

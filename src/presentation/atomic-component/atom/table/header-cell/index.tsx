@@ -37,12 +37,12 @@ export const HeaderCell: FC<HeaderCellProps> = ({
       align={align ?? 'left'}
       className={className}
       sx={{
-        backgroundColor: backgroundColor ?? colors.gray[100],
-        borderBottom: `1px solid ${colors.gray[250]}`,
-        borderLeft: first ? `1px solid ${colors.gray[250]}` : undefined,
+        backgroundColor: backgroundColor ?? colors.gray[50],
+        borderBottom: `1px solid ${colors.gray[100]}`,
+        borderLeft: first ? `1px solid ${colors.gray[100]}` : undefined,
         borderRadius,
-        borderRight: last ? `1px solid ${colors.gray[250]}` : undefined,
-        borderTop: `1px solid ${colors.gray[250]}`,
+        borderRight: last ? `1px solid ${colors.gray[100]}` : undefined,
+        borderTop: `1px solid ${colors.gray[100]}`,
         fontSize: '14px',
         fontWeight: '600',
         maxWidth,

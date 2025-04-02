@@ -1,3 +1,4 @@
+import { ActionModal } from 'presentation/atomic-component/molecule/modal/action-confirmation';
 import { Close } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { QueryName, apiPaths } from 'main/config';
@@ -7,7 +8,7 @@ import { resetProduct } from 'store/product/slice';
 import { resolverError } from 'main/utils';
 import { useAppSelector } from 'store';
 import { useDispatch } from 'react-redux';
-import { useRestaurant } from 'data/hooks';
+import { useModal, useRestaurant } from 'data/hooks';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { FC, ReactNode } from 'react';
@@ -16,14 +17,13 @@ interface MassActionDataProps {
   published?: boolean;
   inStock?: boolean;
   highlight?: boolean;
-  delete?: boolean;
 }
 
 export const RestaurantProductMassAction: FC = () => {
   const [massActionData, setMassActionData] = useState<MassActionDataProps>({});
   const { t } = useTranslation('restaurant');
   const { restaurantId } = useRestaurant();
-
+  const modal = useModal();
   const dispatch = useDispatch();
 
   const { productSelected } = useAppSelector((state) => state.product);
@@ -47,6 +47,22 @@ export const RestaurantProductMassAction: FC = () => {
       resolverError(error);
     }
   };
+
+  const handleDelete = async (): Promise<void> => {
+    try {
+      await api.put({
+        body: { delete: true, ids: Object.values(productSelected).map((item) => item.id) },
+        id: 'multiple',
+        route: apiPaths.product(restaurantId)
+      });
+
+      queryClient.invalidateQueries(QueryName.product);
+      dispatch(resetProduct());
+    } catch (error) {
+      resolverError(error);
+    }
+  };
+
   const item = (items: ItemProps[]): ReactNode => {
     return (
       <div className={'flex flex-col gap-2'}>
@@ -70,7 +86,7 @@ export const RestaurantProductMassAction: FC = () => {
   return (
     <div
       className={
-        'flex flex-col gap-3 px-6 fixed bottom-2 left-1/2 -translate-x-1/2 bg-white border border-gray-350 p-4 rounded shadow-lg'
+        'flex flex-col z-30 gap-3 px-6 fixed bottom-2 left-1/2 -translate-x-1/2 bg-white border border-gray-100 p-4 rounded shadow-lg'
       }
     >
       <div className={'flex items-center'}>
@@ -102,17 +118,28 @@ export const RestaurantProductMassAction: FC = () => {
         ])}
 
         <div className={'flex flex-col gap-2'}>
-          <div
-            className={
-              'bg-danger text-white p-1 rounded text-center hover:bg-danger/85 cursor-pointer border px-2'
+          <ActionModal
+            confirmAction={handleDelete}
+            confirmText={t('product.table.deleteProduct')}
+            modal={modal}
+            openElement={
+              <div
+                className={
+                  'bg-danger text-white p-1 min-w-max rounded text-center hover:bg-danger/85 cursor-pointer border px-2'
+                }
+                onClick={(): void => modal.openModal()}
+              >
+                {t('product.table.deleteProduct')}
+              </div>
             }
-          >
-            {t('product.table.deleteProduct')}
-          </div>
+            subtitle={t('product.table.confirmDeleteText')}
+            title={t('product.table.confirmDeleteTitle')}
+            type={'error'}
+          />
 
           <div
             className={
-              'bg-primary rounded text-white p-1 text-center hover:bg-primary/85 cursor-pointer border px-2'
+              'bg-primary rounded min-w-max text-white p-1 text-center hover:bg-primary/85 cursor-pointer border px-2'
             }
             onClick={handleApply}
           >

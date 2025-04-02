@@ -22,9 +22,9 @@ export const setSortFilter = <T extends keyof FilterSliceState>(
 
   return {
     onChangeSort(sort): void {
-      setFilter(entity, { sort, sortBy: sort ? field : null } as Partial<FilterDataProps<T>>);
+      setFilter(entity, { orderBy: sort ? field : null, sort } as Partial<FilterDataProps<T>>);
     },
-    sort: values?.sort || null,
-    sortBy: values?.sortBy || null
+    orderBy: values?.orderBy || null,
+    sort: values?.sort || null
   };
 };

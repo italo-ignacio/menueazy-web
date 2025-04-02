@@ -15,8 +15,11 @@
       "name": "Filtro",
       "export": "Exportar",
       "newProduct": "Novo Produto",
-      "items_one": "{{count}} item",
-      "items_other": "{{count}} items"
+      "product_one": "<strong>{{count}}</strong> Produto",
+      "product_other": "<strong>{{count}}</strong> Produtos",
+
+      "typeList": "List",
+      "typeCard": "Card"
     },
 
     "statistics": {
@@ -33,7 +36,16 @@
       "published": "Publicado",
       "highlight": "Destaque",
       "category": "Categorias",
+
+      "totalSold": "Total Vendido",
+      "sold_one": "{{count}} vendido",
+      "sold_other": "{{count}} vendidos",
+
+      "review_one": "Avaliação",
       "review": "Avaliações",
+
+      "confirmDeleteTitle": "Tem certeza que deseja deletar os produtos selecionados",
+      "confirmDeleteText": "Apos realizar essa acao todos os produtos e suas relacoes serao excluidos",
 
       "massActions": "Ações em massa (Produtos Selecionados)",
       "outOfStock": "Fora de estoque",

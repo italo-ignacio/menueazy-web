@@ -40,5 +40,5 @@ export const restaurantFilterInitialState: RestaurantFilter = {
   page: 1,
   role: [],
   sort: null,
-  sortBy: null
+  orderBy: null
 };

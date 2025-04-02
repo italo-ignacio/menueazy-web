@@ -19,12 +19,14 @@ interface PaginationProps {
   handleChangePage: (newPage: number) => void;
   handleChangeLimit?: (newLimit: number) => void;
   scrollId?: string;
+  endLimitString?: string;
 }
 
 export const Pagination: FC<PaginationProps> = ({
   page,
   limit,
   totalPages,
+  endLimitString,
   totalElements,
   handleChangeLimit,
   scrollId,
@@ -44,8 +46,6 @@ export const Pagination: FC<PaginationProps> = ({
     showLastButton: true
   });
 
-  // if (!totalPages || totalPages <= 1) return null;
-
   const card = (number: number): ReactNode => (
     <div
       className={
@@ -64,8 +64,8 @@ export const Pagination: FC<PaginationProps> = ({
     if (totalElements)
       return (
         <div className={'flex flex-col items-center divide-y divide-gray-350'}>
-          {totalElements >= 5 ? card(5) : card(totalElements)}
-          {totalElements >= 15 ? card(15) : card(totalElements)}
+          {totalElements >= 5 ? card(5) : null}
+          {totalElements >= 15 ? card(15) : card(totalElements >= 5 ? totalElements : 5)}
           {totalElements > 30 ? card(30) : null}
         </div>
       );
@@ -74,7 +74,46 @@ export const Pagination: FC<PaginationProps> = ({
   };
 
   return (
-    <div className={'flex gap-3 justify-between'}>
+    <div className={'flex gap-3 justify-between flex-row-reverse'}>
+      {totalPages && totalPages > 0 ? (
+        <div className={'flex flex-wrap gap-1 justify-end'}>
+          {items.map(({ page: page2, type, selected, ...item }, index) => {
+            const getText = (): ReactNode | string | undefined => {
+              switch (type) {
+                case 'first':
+                  return <FirstPageOutlined color={'inherit'} fontSize={'small'} />;
+                case 'previous':
+                  return <NavigateBeforeOutlined color={'inherit'} fontSize={'small'} />;
+                case 'page':
+                  return page2;
+                case 'end-ellipsis':
+                  return '...';
+                case 'start-ellipsis':
+                  return '...';
+                case 'next':
+                  return <NavigateNextOutlined color={'inherit'} fontSize={'small'} />;
+                case 'last':
+                  return <LastPageOutlined color={'inherit'} fontSize={'small'} />;
+                default:
+                  return undefined;
+              }
+            };
+
+            return (
+              <PaginationItem
+                key={String(page2) + String(index)}
+                disabled={item.disabled}
+                handleClick={item.disabled || type.endsWith('ellipsis') ? undefined : item.onClick}
+                isEllipsis={type.endsWith('ellipsis')}
+                selected={selected}
+              >
+                {getText()}
+              </PaginationItem>
+            );
+          })}
+        </div>
+      ) : null}
+
       {handleChangeLimit && limit && totalElements ? (
         <div className={'flex gap-2 w-[90px]'}>
           <span>{t('showing')}</span>
@@ -100,45 +139,9 @@ export const Pagination: FC<PaginationProps> = ({
 
           <span>{t('from')}</span>
           <span>{totalElements}</span>
+          <span>{endLimitString ?? t('items')}</span>
         </div>
       ) : null}
-
-      <div className={'flex flex-wrap gap-1 justify-end'}>
-        {items.map(({ page: page2, type, selected, ...item }, index) => {
-          const getText = (): ReactNode | string | undefined => {
-            switch (type) {
-              case 'first':
-                return <FirstPageOutlined color={'inherit'} fontSize={'small'} />;
-              case 'previous':
-                return <NavigateBeforeOutlined color={'inherit'} fontSize={'small'} />;
-              case 'page':
-                return page2;
-              case 'end-ellipsis':
-                return '...';
-              case 'start-ellipsis':
-                return '...';
-              case 'next':
-                return <NavigateNextOutlined color={'inherit'} fontSize={'small'} />;
-              case 'last':
-                return <LastPageOutlined color={'inherit'} fontSize={'small'} />;
-              default:
-                return undefined;
-            }
-          };
-
-          return (
-            <PaginationItem
-              key={String(page2) + String(index)}
-              disabled={item.disabled}
-              handleClick={item.disabled || type.endsWith('ellipsis') ? undefined : item.onClick}
-              isEllipsis={type.endsWith('ellipsis')}
-              selected={selected}
-            >
-              {getText()}
-            </PaginationItem>
-          );
-        })}
-      </div>
     </div>
   );
 };

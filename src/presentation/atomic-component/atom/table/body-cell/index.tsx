@@ -54,7 +54,7 @@ export const BodyCell: FC<BodyCellProps> = ({
       sx={{
         backgroundColor,
         borderBottom: '0px',
-        borderTop: firstRow ? undefined : `1px solid ${colors.gray[200]}`,
+        borderTop: firstRow ? undefined : `1px solid ${colors.gray[100]}`,
         padding: link ? '0' : '12px 18px',
         ...sx
       }}

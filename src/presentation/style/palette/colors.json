@@ -1,5 +1,6 @@
 {
   "primary": "#5E17EB",
+  "primaryTransparent": "#5E17EB67",
   "secondary": "#0F91D2",
 
   "blue": {
@@ -18,12 +19,13 @@
     }
   },
 
-  "green": "#165428",
+  "green": "#D5F0DD",
   "yellow": "#FFB651",
 
   "gray": {
     "default": "#5E5851",
-    "50": "#FBFBFB",
+    "50": "#FAFAFA",
+    "75": "#FDFDFD",
     "100": "#F3F3F3",
     "125": "#F2F3F6",
     "150": "#F3F5F9",

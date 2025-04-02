@@ -23,6 +23,9 @@ export interface Product {
   published: boolean;
   highlight: boolean;
   priceByKmInDelivery?: number;
+  avgRate?: number;
+  totalRate?: number;
+  totalOrder?: number;
   imageList: Image[];
   categoryList: Category[];
   createdAt: Date;
@@ -35,16 +38,24 @@ export interface FindProductQuery extends Pagination {
 
 export interface ProductFilter extends FilterPagination, FilterSort {
   name: string;
+  price: string;
+  published?: boolean;
+  highlight?: boolean;
+  inStock?: boolean;
   email: string;
   role: Role[];
 }
 
 export const productFilterInitialState: ProductFilter = {
   email: '',
+  highlight: undefined,
+  inStock: undefined,
   limit: 5,
   name: '',
+  orderBy: null,
   page: 1,
+  price: '',
+  published: undefined,
   role: [],
-  sort: null,
-  sortBy: null
+  sort: null
 };

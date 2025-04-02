@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
 import { Modal } from 'presentation/atomic-component/atom/modal';
 import { useModal } from 'data/hooks';
+import { useTranslation } from 'react-i18next';
 import type { FC, ReactNode } from 'react';
 import type { OverridableComponent } from '@mui/material/OverridableComponent';
 import type { SvgIconTypeMap } from '@mui/material';
@@ -41,6 +42,8 @@ export const ActionModal: FC<ActionModalProps> = ({
     return 'error';
   };
 
+  const { t } = useTranslation('common');
+
   return (
     <Modal
       button={button}
@@ -51,8 +54,8 @@ export const ActionModal: FC<ActionModalProps> = ({
       openModalElement={openElement}
       size={'small'}
     >
-      <div className={'flex flex-col gap-8 items-center bg-white px-8'}>
-        <div className={'flex flex-col gap-9 text-center'}>
+      <div className={'flex flex-col gap-6 items-center bg-white px-8'}>
+        <div className={'flex flex-col gap-4 text-center'}>
           <h2 className={'text-2xl font-bold'}>{title}</h2>
           {subtitle ? <p className={'text-base'}>{subtitle}</p> : null}
         </div>
@@ -68,7 +71,7 @@ export const ActionModal: FC<ActionModalProps> = ({
             type={'button'}
             variant={'outlined'}
           >
-            Cancelar
+            {t('cancel')}
           </Button>
 
           <Button
@@ -86,7 +89,7 @@ export const ActionModal: FC<ActionModalProps> = ({
             }}
             type={'button'}
           >
-            {type === 'error' ? 'Tentar Novamente' : confirmText}
+            {confirmText ?? t('tryAgain')}
           </Button>
         </div>
       </div>

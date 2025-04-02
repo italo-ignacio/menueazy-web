@@ -6,7 +6,7 @@ import type { Sort } from 'domain/protocol';
 
 export interface TableSortFilter {
   onChangeSort: (sort: Sort) => void;
-  sortBy: string | null;
+  orderBy: string | null;
   sort: Sort;
 }
 

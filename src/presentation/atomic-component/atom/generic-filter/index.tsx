@@ -3,17 +3,19 @@ import { IconButton, InputAdornment } from '@mui/material';
 import { LabelInput } from '..';
 import { useDebounce } from 'data/hooks';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { Dispatch, FC, SetStateAction } from 'react';
 
 interface GenericFilterProps {
   filterValue?: string | null;
   mask?: string;
   onChange: (value: string) => void;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
 export const GenericFilter: FC<GenericFilterProps> = ({ filterValue, mask, onChange, setOpen }) => {
   const [search, setSearch] = useState(filterValue || '');
+  const { t } = useTranslation('common');
 
   useDebounce(
     () => {
@@ -43,11 +45,10 @@ export const GenericFilter: FC<GenericFilterProps> = ({ filterValue, mask, onCha
         setSearch(event.target.value);
       }}
       onKeyUp={(event): void => {
-        if (event.key === 'Enter') setOpen(false);
+        if (event.key === 'Enter' && setOpen) setOpen(false);
       }}
-      placeholder={'Pesquisar'}
+      placeholder={t('search')}
       value={search}
-      variant={'standard'}
     />
   );
 };

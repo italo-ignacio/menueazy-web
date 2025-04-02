@@ -4,23 +4,26 @@ import { ProductTableHeader } from 'presentation/atomic-component/molecule/table
 import { RestaurantProductMassAction } from 'presentation/atomic-component/organism/restaurant-product/mass-action';
 import { TableTemplate } from 'presentation/atomic-component/atom';
 import { useAppSelector } from 'store';
-import { useFindProductQuery } from 'infra/cache';
-import { useReduxPagination, useRestaurant } from 'data/hooks';
+import { useReduxPagination } from 'data/hooks';
 import type { FC } from 'react';
+import type { FindProductQuery } from 'domain/models';
+import type { UseQueryResult } from 'react-query';
 
-export const RestaurantProductTable: FC = () => {
-  const { restaurantId } = useRestaurant();
-  const { handleChangePage, handleChangeLimit } = useReduxPagination('product');
+interface RestaurantProductTableProps {
+  query: UseQueryResult<FindProductQuery>;
+}
+
+export const RestaurantProductTable: FC<RestaurantProductTableProps> = ({ query }) => {
   const { page, limit } = useAppSelector((state) => state.filter.product);
 
-  const productQuery = useFindProductQuery({ limit, page, restaurantId });
+  const { handleChangePage, handleChangeLimit } = useReduxPagination('product');
   const { productSelected } = useAppSelector((state) => state.product);
 
   return (
     <div className={'flex flex-col gap-4 relative'}>
       <TableTemplate
-        tableBody={<ProductTableBody query={productQuery} />}
-        tableHeader={<ProductTableHeader query={productQuery} />}
+        tableBody={<ProductTableBody query={query} />}
+        tableHeader={<ProductTableHeader query={query} />}
       />
 
       {Object.values(productSelected).length ? <RestaurantProductMassAction /> : null}
@@ -30,8 +33,8 @@ export const RestaurantProductTable: FC = () => {
         handleChangePage={handleChangePage}
         limit={limit}
         page={page}
-        totalElements={productQuery.data?.totalElements}
-        totalPages={productQuery.data?.totalPages}
+        totalElements={query.data?.totalElements}
+        totalPages={query.data?.totalPages}
       />
     </div>
   );
