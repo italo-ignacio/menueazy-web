@@ -1,4 +1,4 @@
-import type { FilterPagination, FilterSort, Pagination } from 'domain/protocol';
+import type { FilterPagination, FilterSort } from 'domain/protocol';
 import type { Role } from 'domain/enums';
 
 export interface Category {
@@ -7,10 +7,6 @@ export interface Category {
   description?: string;
   createdAt: Date;
   updatedAt: Date;
-}
-
-export interface FindCategoryQuery extends Pagination {
-  content: Category[];
 }
 
 export interface CategoryFilter extends FilterPagination, FilterSort {
@@ -22,8 +18,8 @@ export interface CategoryFilter extends FilterPagination, FilterSort {
 export const categoryFilterInitialState: CategoryFilter = {
   email: '',
   name: '',
+  orderBy: null,
   page: 1,
   role: [],
-  sort: null,
-  orderBy: null
+  sort: null
 };

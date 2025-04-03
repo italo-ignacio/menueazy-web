@@ -39,7 +39,7 @@ export const CompanyTemplate: FC = () => {
 
         <div
           className={
-            'flex flex-col w-full text-gray-900 h-full px-4 overflow-x-hidden tablet:px-8 py-3 tablet:py-8 laptop:pl-10 laptop:pr-[120px] laptop:py-8 desktop:laptop:py-14'
+            'flex flex-col w-full text-gray-900 min-h-[calc(100dvh-45px)] px-4 overflow-x-hidden tablet:px-8 py-3 tablet:py-8 laptop:pl-10 laptop:pr-[120px] laptop:py-8 desktop:laptop:py-14'
           }
           style={{ marginLeft: getMarginLeft(), transition: 'all 200ms' }}
         >

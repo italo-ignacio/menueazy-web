@@ -29,8 +29,11 @@ interface Resources {
     "cancel": "Cancelar",
     "delete": "Deletar",
     "tryAgain": "Tentar novamente",
-    "item": "Item",
-    "items": "Itens",
+    "item": "item",
+    "until": "até",
+    "min": "Mínimo",
+    "max": "Máximo",
+    "items": "itens",
     "personalization": "Personalização",
     "search": "Pesquisar",
     "rightsReserved": "Todos os Direitos Reservados",
@@ -186,8 +189,8 @@ interface Resources {
         "newProduct": "Novo Produto",
         "product_one": "<strong>{{count}}</strong> Produto",
         "product_other": "<strong>{{count}}</strong> Produtos",
-        "typeList": "List",
-        "typeCard": "Card"
+        "typeList": "Lista",
+        "typeCard": "Cards"
       },
       "statistics": {
         "paymentSuccess": "Pedidos finalizadas",

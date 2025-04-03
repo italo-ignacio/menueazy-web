@@ -11,9 +11,16 @@ interface GenericFilterProps {
   mask?: string;
   onChange: (value: string) => void;
   setOpen?: Dispatch<SetStateAction<boolean>>;
+  autoFocus?: boolean;
 }
 
-export const GenericFilter: FC<GenericFilterProps> = ({ filterValue, mask, onChange, setOpen }) => {
+export const GenericFilter: FC<GenericFilterProps> = ({
+  filterValue,
+  mask,
+  onChange,
+  autoFocus,
+  setOpen
+}) => {
   const [search, setSearch] = useState(filterValue || '');
   const { t } = useTranslation('common');
 
@@ -39,7 +46,7 @@ export const GenericFilter: FC<GenericFilterProps> = ({ filterValue, mask, onCha
           <Search />
         </InputAdornment>
       }
-      autoFocus
+      autoFocus={typeof autoFocus === 'boolean' ? autoFocus : true}
       mask={mask}
       onChange={(event): void => {
         setSearch(event.target.value);

@@ -94,7 +94,17 @@ export const ProductTableHeader: FC<ProductTableHeaderProps> = ({ query }) => {
         />
 
         {/* <HeaderCell minWidth={130} title={t('product.table.totalSold')} /> */}
-        <HeaderCell minWidth={210} title={t('product.table.review')} />
+        <HeaderCell
+          minWidth={210}
+          title={
+            <TableSort
+              filterName={'avgRate'}
+              sortItem={setSortFilter('product', 'avgRate')}
+              title={t('product.table.review')}
+            />
+          }
+        />
+
         <HeaderCell minWidth={50} title={''} />
       </TableRow>
     </TableHead>

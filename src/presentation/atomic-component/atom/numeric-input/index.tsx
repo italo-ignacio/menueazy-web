@@ -9,13 +9,14 @@ import type { UseFormRegisterReturn } from 'react-hook-form';
 
 type NumericInputProps = Pick<
   TextFieldProps,
-  'error' | 'label' | 'onBlur' | 'onFocus' | 'placeholder' | 'required'
+  'error' | 'InputProps' | 'label' | 'onBlur' | 'onFocus' | 'placeholder' | 'required'
 > & {
   type?: 'monetary' | 'percentage' | 'time';
   register?: UseFormRegisterReturn;
   disableDecimal?: boolean;
   onChange?: (event: { formattedValue: string; value: string; floatValue?: number }) => void;
   suffix?: string;
+  defaultValue?: number | string;
   prefix?: string;
   value?: number | string | null;
 };

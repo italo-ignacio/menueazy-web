@@ -39,14 +39,28 @@ export interface FindProductQuery extends Pagination {
 export interface ProductFilter extends FilterPagination, FilterSort {
   name: string;
   price: string;
+
+  priceMT?: number;
+  priceLT?: number;
+
   published?: boolean;
   highlight?: boolean;
   inStock?: boolean;
+
+  totalOrder?: number;
+  totalRate?: number;
+  avgRate?: number;
+
+  showStyle: 'CARD' | 'LIST';
+  cardSize: number;
+
   email: string;
   role: Role[];
 }
 
 export const productFilterInitialState: ProductFilter = {
+  avgRate: undefined,
+  cardSize: 4,
   email: '',
   highlight: undefined,
   inStock: undefined,
@@ -55,7 +69,12 @@ export const productFilterInitialState: ProductFilter = {
   orderBy: null,
   page: 1,
   price: '',
+  priceLT: undefined,
+  priceMT: undefined,
   published: undefined,
   role: [],
-  sort: null
+  showStyle: 'LIST',
+  sort: null,
+  totalOrder: undefined,
+  totalRate: undefined
 };

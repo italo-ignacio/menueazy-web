@@ -7,9 +7,11 @@ import {
 } from '@mui/icons-material';
 import { type FC, type ReactNode, useState } from 'react';
 import { PaginationItem, SimpleMenu } from 'presentation/atomic-component/atom';
+import { dimensions } from 'main/config';
 import { scrollTo } from 'main/utils';
 import { usePagination } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
+import { useWindowDimensions } from 'data/hooks';
 
 interface PaginationProps {
   page: number;
@@ -34,8 +36,10 @@ export const Pagination: FC<PaginationProps> = ({
 }: PaginationProps) => {
   const { t } = useTranslation('common');
   const [isOpen, setIsOpen] = useState(false);
+  const { width } = useWindowDimensions();
 
   const { items } = usePagination({
+    boundaryCount: width < dimensions.tablet ? 1 : undefined,
     count: totalPages,
     onChange(_event, newPage): void {
       handleChangePage(newPage);
@@ -43,14 +47,13 @@ export const Pagination: FC<PaginationProps> = ({
     },
     page,
     showFirstButton: true,
-    showLastButton: true
+    showLastButton: true,
+    siblingCount: width < dimensions.tablet ? 0 : undefined
   });
 
   const card = (number: number): ReactNode => (
     <div
-      className={
-        'flex flex-col min-w-[35px] items-center p-0.5 w-full px-1 cursor-pointer hover:bg-gray-200'
-      }
+      className={`flex flex-col min-w-[35px] items-center p-0.5 w-full px-1 cursor-pointer ${number === limit ? 'bg-primary text-white' : 'hover:bg-gray-200'}`}
       onClick={() => {
         if (handleChangeLimit) handleChangeLimit(number);
         setIsOpen(false);
@@ -74,7 +77,7 @@ export const Pagination: FC<PaginationProps> = ({
   };
 
   return (
-    <div className={'flex gap-3 justify-between flex-row-reverse'}>
+    <div className={'flex flex-col-reverse gap-5 justify-between tablet:flex-row-reverse'}>
       {totalPages && totalPages > 0 ? (
         <div className={'flex flex-wrap gap-1 justify-end'}>
           {items.map(({ page: page2, type, selected, ...item }, index) => {

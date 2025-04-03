@@ -75,7 +75,7 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             style: {
               color: colors.primary,
               svg: {
-                color: colors.primary
+                color: `${colors.primary} !important`
               }
             }
           },

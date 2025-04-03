@@ -1,17 +1,22 @@
 import { MainDiv } from 'presentation/atomic-component/atom';
-import {
-  RestaurantProductFilter,
-  RestaurantProductStatistics,
-  RestaurantProductTable
-} from 'presentation/atomic-component/organism/restaurant-product';
+
+import { useFindOneProductQuery } from 'infra/cache';
+import { useParams } from 'react-router-dom';
+import { useRestaurant } from 'data/hooks';
 import type { FC } from 'react';
 
 export const RestaurantProductIdContent: FC = () => {
+  const { restaurantId } = useRestaurant();
+  const { id } = useParams() as { id: string };
+
+  const productQuery = useFindOneProductQuery({
+    id,
+    restaurantId
+  });
+
   return (
     <MainDiv>
-      <RestaurantProductFilter />
-      <RestaurantProductStatistics />
-      <RestaurantProductTable />
+      <div>{productQuery.data?.id}</div>
     </MainDiv>
   );
 };

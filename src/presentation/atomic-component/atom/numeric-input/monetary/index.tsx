@@ -7,7 +7,7 @@ import type { ChangeEvent, FC } from 'react';
 import type { TextFieldProps } from '@mui/material';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 
-type MonetaryInputProps = Pick<TextFieldProps, 'error' | 'onBlur' | 'onFocus'> & {
+type MonetaryInputProps = Pick<TextFieldProps, 'error' | 'InputProps' | 'onBlur' | 'onFocus'> & {
   onChange?: (event: { formattedValue: string; value: string; floatValue?: number }) => void;
   disableDecimal?: boolean;
   register?: UseFormRegisterReturn;

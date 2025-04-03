@@ -151,7 +151,7 @@ export const ProductTableBody: FC<ProductTableBodyProps> = ({ query }) => {
                   <Star className={'text-[#ff9100]'} color={'inherit'} />
 
                   {item.avgRate ? (
-                    <span className={'font-bold'}>{item.avgRate.toFixed(2)}</span>
+                    <span className={'font-bold'}>{item.avgRate.toFixed(1)}</span>
                   ) : null}
                 </div>
 

@@ -69,6 +69,7 @@ export const apiPaths = {
   restaurant: '/restaurant',
 
   product: (restaurantId: number): string => `/restaurant/${restaurantId}/product`,
+  category: (restaurantId: number): string => `/restaurant/${restaurantId}/category`,
 
   user: '/user'
 };
