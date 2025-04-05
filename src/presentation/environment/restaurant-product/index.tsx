@@ -14,9 +14,24 @@ import { useRestaurant, useWindowDimensions } from 'data/hooks';
 
 export const RestaurantProductContent: FC = () => {
   const { restaurantId } = useRestaurant();
-  const { page, limit, name, orderBy, showStyle, sort } = useAppSelector(
-    (state) => state.filter.product
-  );
+  const {
+    page,
+    limit,
+    name,
+    orderBy,
+    showStyle,
+    sort,
+    avgRateLT,
+    avgRateMT,
+    categoryList,
+    highlight,
+    inStock,
+    priceLT,
+    priceMT,
+    published,
+    totalOrderLT,
+    totalOrderMT
+  } = useAppSelector((state) => state.filter.product);
 
   const { width } = useWindowDimensions();
 
@@ -37,7 +52,21 @@ export const RestaurantProductContent: FC = () => {
   const productQuery = useFindProductQuery({
     limit,
     page,
-    params: { name, orderBy, sort },
+    params: {
+      avgRateLT,
+      avgRateMT,
+      categoryList,
+      highlightBoolean: highlight,
+      inStockBoolean: inStock,
+      name,
+      orderBy,
+      priceLT,
+      priceMT,
+      publishedBoolean: published,
+      sort,
+      totalOrderLT,
+      totalOrderMT
+    },
     restaurantId
   });
 

@@ -9,6 +9,10 @@ export interface Category {
   updatedAt: Date;
 }
 
+export interface FindCategoryQuery {
+  content: Category[];
+}
+
 export interface CategoryFilter extends FilterPagination, FilterSort {
   name: string;
   email: string;
@@ -19,6 +23,7 @@ export const categoryFilterInitialState: CategoryFilter = {
   email: '',
   name: '',
   orderBy: null,
+  orderBySelect: null,
   page: 1,
   role: [],
   sort: null

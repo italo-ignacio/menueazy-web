@@ -1,6 +1,5 @@
 import type { Category } from 'domain/models/category';
 import type { FilterPagination, FilterSort, Pagination } from 'domain/protocol';
-import type { Role } from 'domain/enums';
 
 export interface Image {
   id: number;
@@ -40,41 +39,51 @@ export interface ProductFilter extends FilterPagination, FilterSort {
   name: string;
   price: string;
 
-  priceMT?: number;
-  priceLT?: number;
+  priceMT: string;
+  priceLT: string;
 
-  published?: boolean;
-  highlight?: boolean;
-  inStock?: boolean;
+  published: boolean | string;
+  highlight: boolean | string;
+  inStock: boolean | string;
 
   totalOrder?: number;
+
+  totalOrderMT: string;
+  totalOrderLT: string;
+
   totalRate?: number;
   avgRate?: number;
+
+  avgRateMT: string;
+  avgRateLT: string;
 
   showStyle: 'CARD' | 'LIST';
   cardSize: number;
 
-  email: string;
-  role: Role[];
+  categoryList: number[];
 }
 
 export const productFilterInitialState: ProductFilter = {
   avgRate: undefined,
+  avgRateLT: '',
+  avgRateMT: '',
   cardSize: 4,
-  email: '',
-  highlight: undefined,
-  inStock: undefined,
+  categoryList: [],
+  highlight: '',
+  inStock: '',
   limit: 5,
   name: '',
   orderBy: null,
+  orderBySelect: null,
   page: 1,
   price: '',
-  priceLT: undefined,
-  priceMT: undefined,
-  published: undefined,
-  role: [],
+  priceLT: '',
+  priceMT: '',
+  published: '',
   showStyle: 'LIST',
   sort: null,
   totalOrder: undefined,
+  totalOrderLT: '',
+  totalOrderMT: '',
   totalRate: undefined
 };

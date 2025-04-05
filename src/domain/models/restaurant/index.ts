@@ -37,8 +37,9 @@ export interface RestaurantFilter extends FilterPagination, FilterSort {
 export const restaurantFilterInitialState: RestaurantFilter = {
   email: '',
   name: '',
+  orderBy: null,
+  orderBySelect: null,
   page: 1,
   role: [],
-  sort: null,
-  orderBy: null
+  sort: null
 };

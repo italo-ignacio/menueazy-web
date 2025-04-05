@@ -18,8 +18,9 @@ export interface AddressFilter extends FilterPagination, FilterSort {
 export const addressFilterInitialState: AddressFilter = {
   email: '',
   name: '',
+  orderBy: null,
+  orderBySelect: null,
   page: 1,
   role: [],
-  sort: null,
-  orderBy: null
+  sort: null
 };

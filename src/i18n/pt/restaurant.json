@@ -37,12 +37,14 @@
       "highlight": "Destaque",
       "category": "Categorias",
 
-      "totalSold": "Total Vendido",
+      "totalSold": "Total de vendas",
       "sold_one": "{{count}} vendido",
       "sold_other": "{{count}} vendidos",
 
       "review_one": "Avaliação",
       "review": "Avaliações",
+      "bestReview": "Melhor avaliado",
+      "numberOfReview": "Total de avaliações",
 
       "confirmDeleteTitle": "Tem certeza que deseja deletar os produtos selecionados",
       "confirmDeleteText": "Apos realizar essa acao todos os produtos e suas relacoes serao excluidos",

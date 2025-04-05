@@ -47,8 +47,9 @@ export interface UserFilter extends FilterPagination, FilterSort {
 export const userFilterInitialState: UserFilter = {
   email: '',
   name: '',
+  orderBy: null,
+  orderBySelect: null,
   page: 1,
   role: [],
-  sort: null,
-  orderBy: null
+  sort: null
 };

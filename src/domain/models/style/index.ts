@@ -18,8 +18,9 @@ export interface StyleFilter extends FilterPagination, FilterSort {
 export const styleFilterInitialState: StyleFilter = {
   email: '',
   name: '',
+  orderBy: null,
+  orderBySelect: null,
   page: 1,
   role: [],
-  sort: null,
-  orderBy: null
+  sort: null
 };

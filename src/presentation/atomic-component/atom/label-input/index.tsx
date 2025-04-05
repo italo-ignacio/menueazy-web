@@ -143,12 +143,19 @@ export const LabelInput: FC<LabelInputProps> = ({
         }
         onBlur={props.onFocusOut}
         onChange={(event): void => {
+          // if (props.type === 'number')
+          //   Object.assign(event.target, { value: event.target.value.replace('.', ',') });
+
           if (props.onChange) props.onChange(event);
           else if (register?.onChange) register?.onChange(event);
 
           if (handleChange) handleChange(event);
         }}
         onFocus={props.onFocus}
+        onKeyDown={(event): void => {
+          if (props.type === 'number' && (event.key === 'e' || event.key === '.'))
+            event.preventDefault();
+        }}
         placeholder={props.placeholder}
         sx={{ width: '100%', ...sx }}
         type={props.type}

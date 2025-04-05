@@ -6,18 +6,23 @@ import {
   SaveAlt,
   ViewModule
 } from '@mui/icons-material';
+import { BooleanSearch, MinMaxSearch } from 'presentation/atomic-component/molecule';
 import { Button, Collapse } from '@mui/material';
 import { type FC, useState } from 'react';
 import { GenericFilter } from 'presentation/atomic-component/atom/generic-filter';
-import { MinMaxSearch } from 'presentation/atomic-component/molecule';
+import { Select } from 'presentation/atomic-component/atom/select';
+import { SortFilter } from 'presentation/atomic-component/atom/sort-filter';
 import { api } from 'infra/http';
 import { apiPaths, dimensions, paths } from 'main/config';
+import { colors } from 'presentation/style';
+import { orderByProductSelect } from 'main/mock/product';
 import { resolverError, setFilter } from 'main/utils';
 import { useAppSelector } from 'store';
 import { useFindCategoryQuery } from 'infra/cache';
 import { useNavigate } from 'react-router-dom';
 import { useRestaurant, useWindowDimensions } from 'data/hooks';
 import { useTranslation } from 'react-i18next';
+import type { SelectValues } from 'presentation/atomic-component/atom/select';
 
 interface RestaurantProductFilterProps {
   totalElements?: number;
@@ -25,7 +30,25 @@ interface RestaurantProductFilterProps {
 
 export const RestaurantProductFilter: FC<RestaurantProductFilterProps> = ({ totalElements }) => {
   const { restaurantId, restaurantUrl } = useRestaurant();
-  const { cardSize, limit, showStyle } = useAppSelector((state) => state.filter.product);
+  const {
+    cardSize,
+    limit,
+    showStyle,
+    priceLT,
+    priceMT,
+    highlight,
+    inStock,
+    sort,
+    orderBy,
+    published,
+    name,
+    totalOrderLT,
+    categoryList,
+    avgRateLT,
+    avgRateMT,
+    orderBySelect,
+    totalOrderMT
+  } = useAppSelector((state) => state.filter.product);
 
   const categoryQuery = useFindCategoryQuery({ restaurantId });
   const navigate = useNavigate();
@@ -71,14 +94,21 @@ export const RestaurantProductFilter: FC<RestaurantProductFilterProps> = ({ tota
   };
 
   return (
-    <div className={'flex flex-col gap-4 border border-gray-100 bg-white rounded shadow-base p-4'}>
+    <div
+      className={
+        'flex flex-col divide-y gap-4 border border-gray-100 bg-white rounded shadow-base p-4 pb-2'
+      }
+    >
       <div
         className={
           'flex flex-col gap-4 tablet:gap-0 tablet:flex-row overflow-auto justify-between p-1 tablet:divide-x-2'
         }
       >
         <div className={'flex gap-4 items-center'}>
-          <GenericFilter autoFocus={false} onChange={(name) => setFilter('product', { name })} />
+          <GenericFilter
+            autoFocus={false}
+            onChange={(nameValue) => setFilter('product', { name: nameValue })}
+          />
 
           {totalElements ? (
             <span className={'flex gap-1 '}>
@@ -89,13 +119,29 @@ export const RestaurantProductFilter: FC<RestaurantProductFilterProps> = ({ tota
         </div>
 
         <div className={'flex tablet:ml-auto tablet:pr-5 tablet:justify-end tablet:pl-4 gap-4'}>
-          <Button
-            color={'info'}
-            onClick={(): void => setShowFilter(!showFilter)}
-            startIcon={<FormatListBulleted />}
-          >
-            {t('product.filter.name')}
-          </Button>
+          <div className={'relative'}>
+            {avgRateLT ||
+            avgRateMT ||
+            typeof highlight === 'boolean' ||
+            typeof inStock === 'boolean' ||
+            name ||
+            priceLT ||
+            priceMT ||
+            typeof published === 'boolean' ||
+            totalOrderLT ||
+            totalOrderMT ? (
+              <span className={'absolute -top-1 -right-2 z-20 bg-primary w-5 h-5 rounded-full'} />
+            ) : null}
+
+            <Button
+              color={'info'}
+              onClick={(): void => setShowFilter(!showFilter)}
+              startIcon={<FormatListBulleted />}
+              sx={{ backgroundColor: showFilter ? colors.gray[250] : '' }}
+            >
+              {t('product.filter.name')}
+            </Button>
+          </div>
 
           {showStyle === 'CARD' ? (
             <div className={'flex gap-1'}>
@@ -160,24 +206,52 @@ export const RestaurantProductFilter: FC<RestaurantProductFilterProps> = ({ tota
       </div>
 
       <Collapse in={showFilter}>
-        <div className={'flex gap-6 p-2'}>
+        <div className={'flex gap-10 p-2 py-5'}>
           <div className={'flex flex-col gap-4'}>
             <MinMaxSearch
+              maxValue={priceMT}
+              minValue={priceLT}
               onMaxChange={(value): void => setFilter('product', { priceMT: value })}
               onMinChange={(value): void => setFilter('product', { priceLT: value })}
               title={t('product.table.price')}
+              type={'monetary'}
             />
 
             <MinMaxSearch
-              onMaxChange={(value): void => setFilter('product', { priceMT: value })}
-              onMinChange={(value): void => setFilter('product', { priceLT: value })}
+              maxValue={totalOrderMT}
+              minValue={totalOrderLT}
+              onMaxChange={(value): void => setFilter('product', { totalOrderMT: value })}
+              onMinChange={(value): void => setFilter('product', { totalOrderLT: value })}
               title={t('product.table.totalSold')}
             />
 
             <MinMaxSearch
-              onMaxChange={(value): void => setFilter('product', { priceMT: value })}
-              onMinChange={(value): void => setFilter('product', { priceLT: value })}
+              maxValue={avgRateMT}
+              minValue={avgRateLT}
+              onMaxChange={(value): void => setFilter('product', { avgRateMT: value })}
+              onMinChange={(value): void => setFilter('product', { avgRateLT: value })}
               title={t('product.table.review')}
+              type={'rating'}
+            />
+          </div>
+
+          <div className={'flex flex-col gap-4 tablet:min-w-[160px]'}>
+            <BooleanSearch
+              onChange={(value): void => setFilter('product', { highlight: value })}
+              title={t('product.table.highlight')}
+              value={highlight}
+            />
+
+            <BooleanSearch
+              onChange={(value): void => setFilter('product', { inStock: value })}
+              title={t('product.table.inStock')}
+              value={inStock}
+            />
+
+            <BooleanSearch
+              onChange={(value): void => setFilter('product', { published: value })}
+              title={t('product.table.published')}
+              value={published}
             />
           </div>
 
@@ -185,11 +259,57 @@ export const RestaurantProductFilter: FC<RestaurantProductFilterProps> = ({ tota
             <h2>{t('product.table.category')}</h2>
 
             <div className={'flex flex-wrap gap-2'}>
-              {categoryQuery.data?.map((category) => (
-                <div key={category.id} className={'p-1 px-2 rounded cursor-pointer bg-gray-100'}>
-                  {category.name}
-                </div>
-              ))}
+              {categoryQuery?.data?.content?.map((category) => {
+                const allCategoryList = [...categoryList];
+
+                const hasData = allCategoryList.includes(category.id);
+
+                return (
+                  <div
+                    key={category.id}
+                    className={`p-1 px-4 rounded cursor-pointer ${hasData ? 'bg-primary text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
+                    onClick={(): void => {
+                      setFilter('product', {
+                        categoryList: hasData
+                          ? allCategoryList.filter((items) => items !== category.id)
+                          : [...allCategoryList, category.id]
+                      });
+                    }}
+                  >
+                    {category.name}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className={'flex flex-col w-[250px] gap-3'}>
+            <h2>{t('orderBy', { ns: 'common' })}</h2>
+
+            <div className={'flex w-full items-center gap-3'}>
+              <Select
+                id={'order-by-product'}
+                onChange={(event): void => {
+                  const data = event as SelectValues | null;
+
+                  setFilter('product', {
+                    orderBy: data?.value ?? null,
+                    orderBySelect: data,
+                    sort: 'asc'
+                  });
+                }}
+                options={orderByProductSelect}
+                value={orderBySelect}
+              />
+
+              {orderBySelect ? (
+                <SortFilter
+                  filterName={orderBySelect.value}
+                  onChangeSort={(value): void => setFilter('product', { sort: value })}
+                  orderBy={orderBy}
+                  sort={sort}
+                />
+              ) : null}
             </div>
           </div>
         </div>
