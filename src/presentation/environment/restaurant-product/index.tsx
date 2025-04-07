@@ -1,7 +1,7 @@
 import { type FC, useEffect } from 'react';
 import { MainDiv } from 'presentation/atomic-component/atom';
-import { RestaurantProductCards } from 'presentation/atomic-component/organism/restaurant-product/cards';
 import {
+  RestaurantProductCards,
   RestaurantProductFilter,
   RestaurantProductStatistics,
   RestaurantProductTable
@@ -14,24 +14,9 @@ import { useRestaurant, useWindowDimensions } from 'data/hooks';
 
 export const RestaurantProductContent: FC = () => {
   const { restaurantId } = useRestaurant();
-  const {
-    page,
-    limit,
-    name,
-    orderBy,
-    showStyle,
-    sort,
-    avgRateLT,
-    avgRateMT,
-    categoryList,
-    highlight,
-    inStock,
-    priceLT,
-    priceMT,
-    published,
-    totalOrderLT,
-    totalOrderMT
-  } = useAppSelector((state) => state.filter.product);
+  const { limit, page, highlight, inStock, published, showStyle, ...filterData } = useAppSelector(
+    (state) => state.filter.product
+  );
 
   const { width } = useWindowDimensions();
 
@@ -53,19 +38,10 @@ export const RestaurantProductContent: FC = () => {
     limit,
     page,
     params: {
-      avgRateLT,
-      avgRateMT,
-      categoryList,
+      ...filterData,
       highlightBoolean: highlight,
       inStockBoolean: inStock,
-      name,
-      orderBy,
-      priceLT,
-      priceMT,
-      publishedBoolean: published,
-      sort,
-      totalOrderLT,
-      totalOrderMT
+      publishedBoolean: published
     },
     restaurantId
   });

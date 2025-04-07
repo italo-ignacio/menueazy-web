@@ -2,7 +2,7 @@ import { Checkbox, TableHead, TableRow } from '@mui/material';
 import { HeaderCell } from 'presentation/atomic-component/atom';
 import { SortFilter } from 'presentation/atomic-component/atom/sort-filter';
 import { TableSort } from 'presentation/atomic-component/atom/table-filter';
-import { addProduct, removeProduct } from 'store/product/slice';
+import { addSelectData, removeSelectData } from 'store/select/slice';
 import { setSortFilter } from 'main/utils';
 import { useAppSelector } from 'store';
 import { useDispatch } from 'react-redux';
@@ -19,7 +19,7 @@ export const ProductTableHeader: FC<ProductTableHeaderProps> = ({ query }) => {
   const { t } = useTranslation('restaurant');
   const dispatch = useDispatch();
 
-  const { productSelected } = useAppSelector((state) => state.product);
+  const { productSelected } = useAppSelector((state) => state.select);
   const items = query.data?.content ?? [];
 
   return (
@@ -34,8 +34,15 @@ export const ProductTableHeader: FC<ProductTableHeaderProps> = ({ query }) => {
                 <Checkbox
                   checked={items?.length > 0 && items?.every((item) => productSelected[item.id])}
                   onChange={(event): void => {
-                    if (event.target.checked) dispatch(addProduct(items));
-                    else dispatch(removeProduct(items?.map((item) => item.id)));
+                    if (event.target.checked)
+                      dispatch(addSelectData({ data: items, type: 'productSelected' }));
+                    else
+                      dispatch(
+                        removeSelectData({
+                          ids: items?.map((item) => item.id),
+                          type: 'productSelected'
+                        })
+                      );
                   }}
                 />
               </div>
@@ -105,7 +112,7 @@ export const ProductTableHeader: FC<ProductTableHeaderProps> = ({ query }) => {
           }
         />
 
-        <HeaderCell minWidth={50} title={''} />
+        <HeaderCell last minWidth={50} title={''} />
       </TableRow>
     </TableHead>
   );

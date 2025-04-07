@@ -1,7 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { productFilterInitialState, userFilterInitialState } from 'domain/models';
+import {
+  ingredientFilterInitialState,
+  productFilterInitialState,
+  userFilterInitialState
+} from 'domain/models';
+import type { IngredientFilter, ProductFilter, UserFilter } from 'domain/models';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { ProductFilter, UserFilter } from 'domain/models';
 import type { Sort } from 'domain/protocol';
 
 export interface TableSortFilter {
@@ -13,9 +17,11 @@ export interface TableSortFilter {
 export interface FilterSliceState {
   user: UserFilter;
   product: ProductFilter;
+  ingredient: IngredientFilter;
 }
 
 const initialState: FilterSliceState = {
+  ingredient: ingredientFilterInitialState,
   product: productFilterInitialState,
   user: userFilterInitialState
 };

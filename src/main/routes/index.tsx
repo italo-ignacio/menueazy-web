@@ -17,6 +17,7 @@ import {
   RestaurantProductEditContent,
   RestaurantProductIdContent,
   RestaurantStockContent,
+  RestaurantStockIdContent,
   UserProfileContent
 } from 'presentation/environment';
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
@@ -70,6 +71,8 @@ const RouterConfig: FC = () => (
             />
 
             <Route element={<RestaurantStockContent />} path={routePaths.restaurantStock} />
+            <Route element={<RestaurantStockIdContent />} path={routePaths.restaurantStockId} />
+
             <Route element={<RestaurantDashboardContent />} path={routePaths.restaurantDashboard} />
             <Route element={<RestaurantEmployeesContent />} path={routePaths.restaurantEmployees} />
             <Route element={<UserProfileContent />} path={routePaths.restaurantUserProfile} />

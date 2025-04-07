@@ -22,3 +22,4 @@ export * from './restaurant-product-edit';
 export * from './restaurant-product-id';
 
 export * from './restaurant-stock';
+export * from './restaurant-stock-id';

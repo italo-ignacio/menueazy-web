@@ -59,7 +59,32 @@
   },
 
   "stock": {
-    "title": "Estoque"
+    "title": "Estoque",
+
+    "filter": {
+      "search": "Pesquisar",
+      "name": "Filtro",
+      "export": "Exportar",
+      "newIngredient": "Novo Ingrediente",
+
+      "typeList": "Lista",
+      "typeCard": "Cards"
+    },
+
+    "statistics": {
+      "totalPrice": "Valor gasto com ingredientes",
+      "priceInStock": "Valor em estoque",
+      "priceLastMonth": "Valor gasto (30 dias)",
+      "dailyCost": "Custo diário"
+    },
+
+    "table": {
+      "name": "Nome do ingrediente",
+      "inStock": "Em estoque",
+      "priceInStock": "Preço em estoque",
+      "totalPrice": "Preço gasto (total)",
+      "actions": "Ações"
+    }
   },
 
   "employees": {

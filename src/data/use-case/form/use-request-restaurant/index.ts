@@ -10,15 +10,15 @@ import type { RestaurantRequest } from 'validation/schema';
 import type { SubmitHandler } from 'react-hook-form';
 import type { formReturn } from 'domain/protocol';
 
-interface useRestaurantProps {
+interface useRequestRestaurantProps {
   closeModal?: () => void;
   restaurant?: Restaurant;
 }
 
-export const useRestaurant = ({
+export const useRequestRestaurant = ({
   closeModal,
   restaurant
-}: useRestaurantProps): formReturn<RestaurantRequest> => {
+}: useRequestRestaurantProps): formReturn<RestaurantRequest> => {
   const formData = useForm<RestaurantRequest>({
     resolver: yupResolver(restaurantSchema)
   });

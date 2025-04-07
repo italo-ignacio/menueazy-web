@@ -7,7 +7,7 @@ import { api } from 'infra/http';
 import { apiPaths } from 'main/config';
 import { resolverError, validate } from 'main/utils';
 import { useEffect, useState } from 'react';
-import { useRestaurant } from 'data/use-case/form/use-restaurant';
+import { useRequestRestaurant } from 'data/use-case/form/use-request-restaurant';
 import { useSearch } from 'data/hooks';
 import type { FC, ReactNode } from 'react';
 
@@ -24,7 +24,7 @@ export const RestaurantForm: FC<RestaurantFormProps> = ({ closeModal }) => {
     register,
     setValue,
     formState: { isSubmitting }
-  } = useRestaurant({ closeModal });
+  } = useRequestRestaurant({ closeModal });
 
   const [checkedStatus, setCheckedStatus] = useState<'CHECKING' | 'FAILED' | 'NONE' | 'OK'>('NONE');
 

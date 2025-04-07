@@ -21,6 +21,8 @@ export enum routePaths {
   restaurantProductEdit = '/restaurant/:restaurantUrl/product/:id/edit',
 
   restaurantStock = '/restaurant/:restaurantUrl/stock',
+  restaurantStockId = '/restaurant/:restaurantUrl/stock/:id',
+
   restaurantEmployees = '/restaurant/:restaurantUrl/employees',
   restaurantPersonalization = '/restaurant/:restaurantUrl/personalization',
   restaurantUserProfile = '/restaurant/:restaurantUrl/profile',
@@ -45,11 +47,13 @@ export const paths = {
   restaurantOrder: (url: string): string => `/restaurant/${url}/order`,
 
   restaurantProduct: (url: string): string => `/restaurant/${url}/product`,
-  restaurantProductId: (url: string, id: number): string => `/restaurant/${url}/product/${id}`,
-  restaurantProductEdit: (url: string, id: number): string =>
+  restaurantProductId: (url: string, id: unknown): string => `/restaurant/${url}/product/${id}`,
+  restaurantProductEdit: (url: string, id: unknown): string =>
     `/restaurant/${url}/product/${id}/edit`,
 
   restaurantStock: (url: string): string => `/restaurant/${url}/stock`,
+  restaurantStockId: (url: string, id: unknown): string => `/restaurant/${url}/stock/${id}`,
+
   restaurantEmployees: (url: string): string => `/restaurant/${url}/employees`,
   restaurantPersonalization: (url: string): string => `/restaurant/${url}/personalization`,
   restaurantUserProfile: (url: string): string => `/restaurant/${url}/profile`,
@@ -70,6 +74,7 @@ export const apiPaths = {
 
   product: (restaurantId: number): string => `/restaurant/${restaurantId}/product`,
   category: (restaurantId: number): string => `/restaurant/${restaurantId}/category`,
+  ingredient: (restaurantId: number): string => `/restaurant/${restaurantId}/ingredient`,
 
   user: '/user'
 };

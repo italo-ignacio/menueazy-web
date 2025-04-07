@@ -14,12 +14,14 @@ export interface JwtPayload {
 
 const isExpired = (accessToken: string | null): boolean => {
   if (!accessToken || String(accessToken) === 'null') return true;
+  try {
+    const token = jwtDecode(accessToken ?? '') as JwtPayload | null;
 
-  const token = jwtDecode(accessToken ?? '') as JwtPayload | null;
-
-  if (!token?.exp) return true;
-
-  return !!(Date.now() >= token.exp * 1000);
+    if (!token?.exp) return true;
+    return !!(Date.now() >= token.exp * 1000);
+  } catch {
+    return true;
+  }
 };
 
 export const useTokenIsExpired = (): boolean => {

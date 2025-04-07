@@ -17,7 +17,7 @@ export const RestaurantProductTable: FC<RestaurantProductTableProps> = ({ query 
   const { page, limit } = useAppSelector((state) => state.filter.product);
 
   const { handleChangePage, handleChangeLimit } = useReduxPagination('product');
-  const { productSelected } = useAppSelector((state) => state.product);
+  const { productSelected } = useAppSelector((state) => state.select);
 
   return (
     <div className={'flex flex-col gap-4 relative'}>

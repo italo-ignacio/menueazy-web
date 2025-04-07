@@ -4,7 +4,7 @@ import { type FindProductQuery, currencyData } from 'domain/models';
 import { Link } from 'react-router-dom';
 import { NavigateNext, Star, StarOutline } from '@mui/icons-material';
 import { QueryName, apiPaths, paths } from 'main/config';
-import { addProduct, removeProduct } from 'store/product/slice';
+import { addSelectData, removeSelectData } from 'store/select/slice';
 import { api } from 'infra/http';
 import { colors } from 'presentation/style';
 import { queryClient } from 'infra/lib';
@@ -28,7 +28,7 @@ interface ActionDataProps {
 
 export const ProductTableBody: FC<ProductTableBodyProps> = ({ query }) => {
   const { currency } = useAppSelector((state) => state.persist);
-  const { productSelected } = useAppSelector((state) => state.product);
+  const { productSelected } = useAppSelector((state) => state.select);
   const dispatch = useDispatch();
 
   const { t } = useTranslation('restaurant');
@@ -69,8 +69,9 @@ export const ProductTableBody: FC<ProductTableBodyProps> = ({ query }) => {
                 <Checkbox
                   checked={!!productSelected[item.id]}
                   onChange={(event): void => {
-                    if (event.target.checked) dispatch(addProduct([item]));
-                    else dispatch(removeProduct([item.id]));
+                    if (event.target.checked)
+                      dispatch(addSelectData({ data: [item], type: 'productSelected' }));
+                    else dispatch(removeSelectData({ ids: [item.id], type: 'productSelected' }));
                   }}
                 />
 

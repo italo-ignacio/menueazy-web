@@ -24,5 +24,16 @@
   "personalization": "Personalização",
   "search": "Pesquisar",
   "rightsReserved": "Todos os Direitos Reservados",
-  "settings": "configurações"
+  "settings": "configurações",
+  "GRAM": "g",
+  "grams": "Gramas (g)",
+  "KILOGRAM": "kg",
+  "kilograms": "Quilograma (Kg)",
+  "MILLILITER": "ml",
+  "milliliters": "Mililitro (ml)",
+  "LITER": "L",
+  "liters": "Litros (L)",
+  "UNIT": "Unidade",
+  "UNIT_one": "Unidade",
+  "UNIT_other": "Unidades"
 }

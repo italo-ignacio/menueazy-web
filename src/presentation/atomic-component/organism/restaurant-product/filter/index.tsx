@@ -112,7 +112,7 @@ export const RestaurantProductFilter: FC<RestaurantProductFilterProps> = ({ tota
 
           {totalElements ? (
             <span className={'flex gap-1 '}>
-              <span>{totalElements}</span>
+              <strong>{totalElements}</strong>
               <span>{t('items', { ns: 'common' })}</span>
             </span>
           ) : null}

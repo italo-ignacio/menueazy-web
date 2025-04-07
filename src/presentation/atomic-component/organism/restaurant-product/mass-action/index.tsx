@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material';
 import { QueryName, apiPaths } from 'main/config';
 import { api } from 'infra/http';
 import { queryClient } from 'infra/lib';
-import { resetProduct } from 'store/product/slice';
+import { resetSelectData } from 'store/select/slice';
 import { resolverError } from 'main/utils';
 import { useAppSelector } from 'store';
 import { useDispatch } from 'react-redux';
@@ -26,7 +26,7 @@ export const RestaurantProductMassAction: FC = () => {
   const modal = useModal();
   const dispatch = useDispatch();
 
-  const { productSelected } = useAppSelector((state) => state.product);
+  const { productSelected } = useAppSelector((state) => state.select);
 
   interface ItemProps {
     title: string;
@@ -57,7 +57,7 @@ export const RestaurantProductMassAction: FC = () => {
       });
 
       queryClient.invalidateQueries(QueryName.product);
-      dispatch(resetProduct());
+      dispatch(resetSelectData('productSelected'));
     } catch (error) {
       resolverError(error);
     }
@@ -94,7 +94,7 @@ export const RestaurantProductMassAction: FC = () => {
 
         <IconButton
           onClick={(): void => {
-            dispatch(resetProduct());
+            dispatch(resetSelectData('productSelected'));
           }}
         >
           <Close />

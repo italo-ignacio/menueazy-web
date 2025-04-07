@@ -40,7 +40,18 @@ interface Resources {
     "personalization": "Personalização",
     "search": "Pesquisar",
     "rightsReserved": "Todos os Direitos Reservados",
-    "settings": "configurações"
+    "settings": "configurações",
+    "GRAM": "g",
+    "grams": "Gramas (g)",
+    "KILOGRAM": "kg",
+    "kilograms": "Quilograma (Kg)",
+    "MILLILITER": "ml",
+    "milliliters": "Mililitro (ml)",
+    "LITER": "L",
+    "liters": "Litros (L)",
+    "UNIT": "Unidade",
+    "UNIT_one": "Unidade",
+    "UNIT_other": "Unidades"
   },
   "company": {
     "dashboard": {
@@ -71,6 +82,7 @@ interface Resources {
     "products": "Produtos",
     "productOptionGroup": "Grupo de opções de produto",
     "productOptionItem": "Item do grupo do produto",
+    "ingredient": "Ingrediente",
     "address": "Endereço",
     "order": "Pedido",
     "deliveryPerson": "Entregador",
@@ -208,13 +220,13 @@ interface Resources {
         "published": "Publicado",
         "highlight": "Destaque",
         "category": "Categorias",
-        "totalSold": "Total Vendido",
+        "totalSold": "Total de vendas",
         "sold_one": "{{count}} vendido",
         "sold_other": "{{count}} vendidos",
         "review_one": "Avaliação",
         "review": "Avaliações",
         "bestReview": "Melhor avaliado",
-        "numberOfReview": "Número de avaliações",
+        "numberOfReview": "Total de avaliações",
         "confirmDeleteTitle": "Tem certeza que deseja deletar os produtos selecionados",
         "confirmDeleteText": "Apos realizar essa acao todos os produtos e suas relacoes serao excluidos",
         "massActions": "Ações em massa (Produtos Selecionados)",
@@ -226,7 +238,28 @@ interface Resources {
       }
     },
     "stock": {
-      "title": "Estoque"
+      "title": "Estoque",
+      "filter": {
+        "search": "Pesquisar",
+        "name": "Filtro",
+        "export": "Exportar",
+        "newIngredient": "Novo Ingrediente",
+        "typeList": "Lista",
+        "typeCard": "Cards"
+      },
+      "statistics": {
+        "totalPrice": "Valor gasto com ingredientes",
+        "priceInStock": "Valor em estoque",
+        "priceLastMonth": "Valor gasto (30 dias)",
+        "dailyCost": "Custo diário"
+      },
+      "table": {
+        "name": "Nome do ingrediente",
+        "inStock": "Em estoque",
+        "priceInStock": "Preço em estoque",
+        "totalPrice": "Preço gasto (total)",
+        "actions": "Ações"
+      }
     },
     "employees": {
       "title": "Funcionários"

@@ -9,7 +9,7 @@ import {
 import { Link } from 'react-router-dom';
 import { type Product, currencyData } from 'domain/models';
 import { QueryName, apiPaths, paths } from 'main/config';
-import { addProduct, removeProduct } from 'store/product/slice';
+import { addSelectData, removeSelectData } from 'store/select/slice';
 import { api } from 'infra/http';
 import { colors } from 'presentation/style';
 import { queryClient } from 'infra/lib';
@@ -31,7 +31,7 @@ export const ProductCard: FC<Product> = ({ ...item }) => {
   const { t } = useTranslation('restaurant');
   const { currency } = useAppSelector((state) => state.persist);
   const { restaurantId, restaurantUrl } = useRestaurant();
-  const { productSelected } = useAppSelector((state) => state.product);
+  const { productSelected } = useAppSelector((state) => state.select);
 
   const dispatch = useDispatch();
 
@@ -51,6 +51,12 @@ export const ProductCard: FC<Product> = ({ ...item }) => {
     } catch (error) {
       resolverError(error);
     }
+  };
+
+  const handleClick = (): void => {
+    if (productSelected[item.id])
+      dispatch(removeSelectData({ ids: [item.id], type: 'productSelected' }));
+    else dispatch(addSelectData({ data: [item], type: 'productSelected' }));
   };
 
   return (
@@ -79,29 +85,17 @@ export const ProductCard: FC<Product> = ({ ...item }) => {
             <CheckBoxOutlined
               className={'cursor-pointer text-primary hover:text-primary'}
               color={'inherit'}
-              onClick={(): void => {
-                if (productSelected[item.id]) dispatch(removeProduct([item.id]));
-                else dispatch(addProduct([item]));
-              }}
+              onClick={handleClick}
             />
           ) : (
             <CheckBoxOutlineBlank
               className={'cursor-pointer text-gray-550 hover:text-gray-600'}
               color={'inherit'}
-              onClick={(): void => {
-                if (productSelected[item.id]) dispatch(removeProduct([item.id]));
-                else dispatch(addProduct([item]));
-              }}
+              onClick={handleClick}
             />
           )}
 
-          <h2
-            className={'text-xl font-semibold break-words'}
-            onClick={(): void => {
-              if (productSelected[item.id]) dispatch(removeProduct([item.id]));
-              else dispatch(addProduct([item]));
-            }}
-          >
+          <h2 className={'text-xl font-semibold break-words'} onClick={handleClick}>
             {item.name}
           </h2>
         </div>

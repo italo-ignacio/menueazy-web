@@ -39,3 +39,10 @@ export const orderByProductSelect: SelectValues[] = [
   { label: t('product.table.totalSold', { ns: 'restaurant' }), value: 'totalOrder' },
   { label: t('product.table.numberOfReview', { ns: 'restaurant' }), value: 'totalRate' }
 ];
+
+export const orderByIngredientSelect: SelectValues[] = [
+  { label: t('stock.table.name', { ns: 'restaurant' }), value: 'name' },
+  { label: t('stock.table.inStock', { ns: 'restaurant' }), value: 'quantity' },
+  { label: t('stock.table.priceInStock', { ns: 'restaurant' }), value: 'priceInStock' },
+  { label: t('stock.table.totalPrice', { ns: 'restaurant' }), value: 'totalPrice' }
+];

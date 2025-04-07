@@ -6,6 +6,7 @@ import { apiPaths, paths } from 'main/config';
 import { callToast } from 'main/utils';
 import { encryptUniqueData } from 'main/utils/crypto';
 import { logout, setRedirectPath, setUser } from 'store/persist/slice';
+import { toast } from 'react-toastify';
 import { useAppSelector } from 'store';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -47,6 +48,7 @@ export const CompanyRoute: FC = () => {
           }
         } catch {
           navigate(paths.login);
+          toast.dismiss();
           callToast.error(`${t('company')} ${t('notFound', { ns: 'errors' })}`);
         }
     };
