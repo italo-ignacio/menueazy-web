@@ -13,16 +13,18 @@ interface RestaurantStockTableProps {
 }
 
 export const RestaurantStockTable: FC<RestaurantStockTableProps> = ({ query }) => {
-  const { page, limit } = useAppSelector((state) => state.filter.product);
+  const { page, limit } = useAppSelector((state) => state.filter.ingredient);
 
-  const { handleChangePage, handleChangeLimit } = useReduxPagination('product');
+  const { handleChangePage, handleChangeLimit } = useReduxPagination('ingredient');
 
   return (
     <div className={'flex flex-col gap-4 relative'}>
-      <TableTemplate
-        tableBody={<IngredientTableBody query={query} />}
-        tableHeader={<IngredientTableHeader query={query} />}
-      />
+      <div className={'min-h-[calc(100dvh-48dvh)]  shadow-base bg-white'}>
+        <TableTemplate
+          tableBody={<IngredientTableBody query={query} />}
+          tableHeader={<IngredientTableHeader query={query} />}
+        />
+      </div>
 
       <Pagination
         handleChangeLimit={handleChangeLimit}

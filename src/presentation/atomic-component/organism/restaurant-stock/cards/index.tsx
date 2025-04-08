@@ -12,9 +12,9 @@ interface RestaurantStockCardsProps {
 }
 
 export const RestaurantStockCards: FC<RestaurantStockCardsProps> = ({ query }) => {
-  const { page, limit, cardSize } = useAppSelector((state) => state.filter.product);
+  const { page, limit, cardSize } = useAppSelector((state) => state.filter.ingredient);
 
-  const { handleChangePage, handleChangeLimit } = useReduxPagination('product');
+  const { handleChangePage, handleChangeLimit } = useReduxPagination('ingredient');
 
   return (
     <div className={'flex flex-col gap-4 relative'}>

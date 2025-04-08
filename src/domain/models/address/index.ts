@@ -3,6 +3,15 @@ import type { Role } from 'domain/enums';
 
 export interface Address {
   id: number;
+  city: string;
+  complement: string;
+  country: string;
+  latitude: string;
+  longitude: string;
+  number: string;
+  state: string;
+  street: string;
+  zipCode: string;
 }
 
 export interface FindAddressQuery extends Pagination {

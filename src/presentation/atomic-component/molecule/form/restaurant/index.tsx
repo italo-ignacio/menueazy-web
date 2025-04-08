@@ -9,6 +9,7 @@ import { resolverError, validate } from 'main/utils';
 import { useEffect, useState } from 'react';
 import { useRequestRestaurant } from 'data/use-case/form/use-request-restaurant';
 import { useSearch } from 'data/hooks';
+import { useTranslation } from 'react-i18next';
 import type { FC, ReactNode } from 'react';
 
 interface RestaurantFormProps {
@@ -29,6 +30,7 @@ export const RestaurantForm: FC<RestaurantFormProps> = ({ closeModal }) => {
   const [checkedStatus, setCheckedStatus] = useState<'CHECKING' | 'FAILED' | 'NONE' | 'OK'>('NONE');
 
   const [url, setUrl] = useState('');
+  const { t } = useTranslation('errors');
 
   const { search } = useSearch({ searchDebounce: url });
 
@@ -43,9 +45,7 @@ export const RestaurantForm: FC<RestaurantFormProps> = ({ closeModal }) => {
           route: apiPaths.restaurant
         });
 
-        if (!data.canUseUrl) setCheckedStatus('FAILED');
-
-        setCheckedStatus('OK');
+        setCheckedStatus(data.canUseUrl ? 'OK' : 'FAILED');
         setValue('restaurantUrl', url, validate);
       } catch (error) {
         resolverError(error);
@@ -93,6 +93,8 @@ export const RestaurantForm: FC<RestaurantFormProps> = ({ closeModal }) => {
 
         <div className={'flex gap-4 items-center'}>
           <LabelInput
+            error={checkedStatus === 'FAILED'}
+            errorMessage={t('urlInUse')}
             label={'URL do restaurant'}
             onChange={(event): void => setUrl(event.target.value)}
             placeholder={'Digite a URL do restaurant'}

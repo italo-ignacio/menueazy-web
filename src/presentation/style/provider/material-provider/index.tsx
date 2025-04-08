@@ -237,7 +237,33 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             },
             boxShadow: '0px 12px 13px -8px rgba(0,0,0,0.04)'
           }
-        }
+        },
+        variants: [
+          {
+            props: { variant: 'filled' },
+            style: {
+              '.MuiFilledInput-root': {
+                backgroundColor: 'transparent !important'
+              },
+              '.MuiInputBase-root': {
+                maxHeight: '40px !important'
+              },
+              ':hover': {
+                backgroundColor: 'transparent'
+              },
+              input: {
+                ':hover': {
+                  backgroundColor: 'transparent'
+                },
+                active: {
+                  backgroundColor: 'transparent'
+                },
+                padding: '8.5px 8px !important'
+              },
+              maxHeight: '40px'
+            }
+          }
+        ]
         // variants: [
         //   {
         //     props: { color: 'hide' },

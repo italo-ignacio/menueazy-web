@@ -6,7 +6,7 @@ export interface SidebarState {
 }
 
 const initialState: SidebarState = {
-  open: false
+  open: true
 };
 
 const SidebarSlice = createSlice({

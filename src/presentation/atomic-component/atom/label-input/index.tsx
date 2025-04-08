@@ -12,6 +12,7 @@ export interface LabelInputProps
     TextFieldProps,
     | 'defaultValue'
     | 'InputLabelProps'
+    | 'inputMode'
     | 'InputProps'
     | 'inputProps'
     | 'inputRef'
@@ -153,8 +154,22 @@ export const LabelInput: FC<LabelInputProps> = ({
         }}
         onFocus={props.onFocus}
         onKeyDown={(event): void => {
-          if (props.type === 'number' && (event.key === 'e' || event.key === '.'))
-            event.preventDefault();
+          if (props.inputMode === 'decimal') {
+            const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete'];
+            const isNumber = /^[0-9]$/u.test(event.key);
+            const isDotOrComma = event.key === '.' || event.key === ',';
+
+            const currentValue = props?.value ?? '';
+
+            const alreadyHasDot = currentValue.includes('.');
+            const alreadyHasComma = currentValue.includes(',');
+
+            if (!isNumber && !isDotOrComma && !allowedKeys.includes(event.key))
+              event.preventDefault();
+
+            if ((event.key === '.' || event.key === ',') && (alreadyHasDot || alreadyHasComma))
+              event.preventDefault();
+          }
         }}
         placeholder={props.placeholder}
         sx={{ width: '100%', ...sx }}

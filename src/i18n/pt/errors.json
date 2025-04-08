@@ -1,5 +1,7 @@
 {
   "requestError": "Ocorreu um erro na requisição",
   "invalidCredential": "E-mail e/ou senha inválidos",
+  "urlInUse": "URL está em uso",
+  "invalidData": "Dados inválidos",
   "notFound": "não encontrado"
 }

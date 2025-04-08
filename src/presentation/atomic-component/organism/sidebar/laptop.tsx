@@ -29,7 +29,7 @@ export const LaptopSidebar: FC<LaptopSidebarProps> = ({ type }) => {
   return (
     <div
       className={`flex flex-col fixed gap-3 z-40 h-dvh border-r bg-white border-gray-125 transition-[width] ease-in-out ${
-        open ? 'w-[301px]' : 'w-[81px]'
+        open ? 'w-[230px]' : 'w-[81px]'
       }`}
       ref={containerRef}
     >

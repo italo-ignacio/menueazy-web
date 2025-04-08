@@ -12,3 +12,9 @@ export const formatDate = (date: Date | string | null, formatType?: string): str
     return '';
   }
 };
+
+export const formatHour = (date?: string | null): string => {
+  if (!date) return '';
+
+  return String(date)?.slice(0, 5);
+};

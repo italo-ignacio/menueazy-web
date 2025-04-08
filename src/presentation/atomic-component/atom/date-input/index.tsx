@@ -12,6 +12,7 @@ interface DatePickerProps {
   onChange?: (newDate: Date | null | undefined) => void;
   disabled?: boolean;
   error?: boolean;
+  minDate?: Date;
   placeholder?: string;
   label?: string;
   register?: UseFormRegisterReturn;
@@ -25,6 +26,7 @@ export const DateInput: FC<DatePickerProps> = ({
   defaultValue,
   label,
   value,
+  minDate,
   disabled
 }) => {
   const [date, setDate] = useState<Date | null | undefined>(defaultValue ?? value ?? undefined);
@@ -55,6 +57,7 @@ export const DateInput: FC<DatePickerProps> = ({
           okButtonLabel: 'Salvar',
           toolbarTitle: 'Selecione a data'
         }}
+        minDate={minDate}
         onChange={(selectedDate): void => {
           setDate(new Date(selectedDate as unknown as string));
         }}
@@ -65,12 +68,17 @@ export const DateInput: FC<DatePickerProps> = ({
             placeholder
           }
         }}
+        sx={{
+          '.MuiInputAdornment-root': {
+            padding: '0px 12px'
+          }
+        }}
         value={date}
         views={['day', 'month', 'year']}
       />
 
       {date && !disabled ? (
-        <div className={'absolute top-2.5 right-4 tablet:right-10'}>
+        <div className={'absolute top-1 right-4 tablet:right-10'}>
           <IconButton
             onClick={(): void => {
               setDate(null);

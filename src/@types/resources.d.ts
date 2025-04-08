@@ -35,12 +35,17 @@ interface Resources {
     "until": "até",
     "orderBy": "Ordenar por",
     "min": "Mínimo",
+    "open": "Aberto",
+    "seeHours": "Ver horários",
+    "close": "Fechado",
     "max": "Máximo",
-    "items": "itens",
+    "items_one": "item",
+    "sold_other": "itens",
     "personalization": "Personalização",
     "search": "Pesquisar",
     "rightsReserved": "Todos os Direitos Reservados",
     "settings": "configurações",
+    "per": "por",
     "GRAM": "g",
     "grams": "Gramas (g)",
     "KILOGRAM": "kg",
@@ -51,14 +56,25 @@ interface Resources {
     "liters": "Litros (L)",
     "UNIT": "Unidade",
     "UNIT_one": "Unidade",
-    "UNIT_other": "Unidades"
+    "UNIT_other": "Unidades",
+    "MONDAY": "Segunda-feira",
+    "TUESDAY": "Terça-feira",
+    "WEDNESDAY": "Quarta-feira",
+    "THURSDAY": "Quinta-feira",
+    "FRIDAY": "Sexta-feira",
+    "SATURDAY": "Sábado",
+    "SUNDAY": "Domingo"
   },
   "company": {
     "dashboard": {
       "title": "Dashboard"
     },
     "restaurant": {
-      "title": "Resturantes"
+      "title": "Resturantes",
+      "invoicing": "Faturamento",
+      "costs": "Custos gerados",
+      "totalRestaurants": "Total de restaurantes",
+      "openingRestaurants": "Restaurantes abertos"
     },
     "employees": {
       "title": "Funcionarios"
@@ -84,6 +100,7 @@ interface Resources {
     "productOptionItem": "Item do grupo do produto",
     "ingredient": "Ingrediente",
     "address": "Endereço",
+    "openingHours": "Horário de funcionamento",
     "order": "Pedido",
     "deliveryPerson": "Entregador",
     "employee": "Funcionário",
@@ -96,6 +113,8 @@ interface Resources {
   "errors": {
     "requestError": "Ocorreu um erro na requisição",
     "invalidCredential": "E-mail e/ou senha inválidos",
+    "urlInUse": "URL está em uso",
+    "invalidData": "Dados inválidos",
     "notFound": "não encontrado"
   },
   "header": {

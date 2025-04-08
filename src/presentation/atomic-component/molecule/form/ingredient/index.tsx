@@ -21,10 +21,8 @@ export const IngredientForm: FC<IngredientFormProps> = ({ closeModal, ingredient
     onSubmit,
     control,
     setValue,
-    formState: { isSubmitting, errors }
+    formState: { isSubmitting }
   } = useIngredient({ closeModal, ingredient });
-
-  console.log(errors);
 
   // const { t } = useTranslation('restaurant');
 

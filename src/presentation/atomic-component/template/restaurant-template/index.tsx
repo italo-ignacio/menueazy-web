@@ -19,7 +19,7 @@ export const RestaurantTemplate: FC = () => {
 
     // Sidebar on top of content
     // if (open) return '81px';
-    if (open) return '301px';
+    if (open) return '230px';
 
     return '81px';
   };
@@ -39,7 +39,7 @@ export const RestaurantTemplate: FC = () => {
 
         <div
           className={
-            'flex flex-col w-full text-gray-900 min-h-[calc(100dvh-45px)] px-4 overflow-x-hidden tablet:px-8 py-8 laptop:pl-10 laptop:pr-[120px] laptop:py-8 desktop:laptop:py-14'
+            'flex flex-col w-full text-gray-900 min-h-[calc(100dvh-45px)] px-4 py-8 overflow-x-hidden tablet:px-8'
           }
           style={{ marginLeft: getMarginLeft(), transition: 'all 200ms' }}
         >

@@ -2,9 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   ingredientFilterInitialState,
   productFilterInitialState,
+  restaurantFilterInitialState,
   userFilterInitialState
 } from 'domain/models';
-import type { IngredientFilter, ProductFilter, UserFilter } from 'domain/models';
+import type { IngredientFilter, ProductFilter, RestaurantFilter, UserFilter } from 'domain/models';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { Sort } from 'domain/protocol';
 
@@ -18,11 +19,13 @@ export interface FilterSliceState {
   user: UserFilter;
   product: ProductFilter;
   ingredient: IngredientFilter;
+  restaurant: RestaurantFilter;
 }
 
 const initialState: FilterSliceState = {
   ingredient: ingredientFilterInitialState,
   product: productFilterInitialState,
+  restaurant: restaurantFilterInitialState,
   user: userFilterInitialState
 };
 

@@ -20,13 +20,15 @@ export const RestaurantProductCards: FC<RestaurantProductCardsProps> = ({ query 
 
   return (
     <div className={'flex flex-col gap-4 relative'}>
-      <div
-        className={'grid gap-4 w-full ax-w-max bg-white p-2'}
-        style={{
-          gridTemplateColumns: `repeat(${cardSize}, calc((100% - ${(cardSize - 1) * 16}px) / ${cardSize}))`
-        }}
-      >
-        {query.data?.content?.map((item) => <ProductCard key={item.id} {...item} />)}
+      <div className={'min-h-[calc(100dvh-48dvh)] shadow-base bg-white'}>
+        <div
+          className={'grid gap-4 w-full p-2'}
+          style={{
+            gridTemplateColumns: `repeat(${cardSize}, calc((100% - ${(cardSize - 1) * 16}px) / ${cardSize}))`
+          }}
+        >
+          {query.data?.content?.map((item) => <ProductCard key={item.id} {...item} />)}
+        </div>
       </div>
 
       {Object.values(productSelected).length ? <RestaurantProductMassAction /> : null}

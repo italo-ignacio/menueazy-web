@@ -21,10 +21,12 @@ export const RestaurantProductTable: FC<RestaurantProductTableProps> = ({ query 
 
   return (
     <div className={'flex flex-col gap-4 relative'}>
-      <TableTemplate
-        tableBody={<ProductTableBody query={query} />}
-        tableHeader={<ProductTableHeader query={query} />}
-      />
+      <div className={'min-h-[calc(100dvh-48dvh)] shadow-base bg-white'}>
+        <TableTemplate
+          tableBody={<ProductTableBody query={query} />}
+          tableHeader={<ProductTableHeader query={query} />}
+        />
+      </div>
 
       {Object.values(productSelected).length ? <RestaurantProductMassAction /> : null}
 

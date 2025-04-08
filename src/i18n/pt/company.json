@@ -4,7 +4,12 @@
   },
 
   "restaurant": {
-    "title": "Resturantes"
+    "title": "Resturantes",
+
+    "invoicing": "Faturamento",
+    "costs": "Custos gerados",
+    "totalRestaurants": "Total de restaurantes",
+    "openingRestaurants": "Restaurantes abertos"
   },
 
   "employees": {

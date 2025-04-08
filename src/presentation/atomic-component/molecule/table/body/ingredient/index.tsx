@@ -1,8 +1,8 @@
 import { BodyCell, ItemNotFound } from 'presentation/atomic-component/atom';
 import { Button, Checkbox, TableBody, TableRow } from '@mui/material';
 import { type FindIngredientQuery, currencyData } from 'domain/models';
-import { Image, NavigateNext, NoteAdd } from '@mui/icons-material';
-import { IngredientModal } from 'presentation/atomic-component/molecule/modal';
+import { Image, NavigateNext } from '@mui/icons-material';
+import { IngredientDataModal, IngredientModal } from 'presentation/atomic-component/molecule/modal';
 import { Link } from 'react-router-dom';
 import { addSelectData, removeSelectData } from 'store/select/slice';
 import { paths } from 'main/config';
@@ -103,10 +103,7 @@ export const IngredientTableBody: FC<IngredientTableBodyProps> = ({ query }) => 
             title={
               <div className={'flex gap-4'}>
                 <IngredientModal ingredient={item} />
-
-                <Button sx={{ maxWidth: 40, minWidth: '0' }} variant={'outlined'}>
-                  <NoteAdd />
-                </Button>
+                <IngredientDataModal ingredient={item} />
 
                 <Link to={paths.restaurantStockId(restaurantUrl, item.id)}>
                   <Button color={'info'} sx={{ maxWidth: 40, minWidth: '0' }}>

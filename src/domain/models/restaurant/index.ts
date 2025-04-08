@@ -1,6 +1,6 @@
 import type { Address } from 'domain/models/address';
 import type { FilterPagination, FilterSort, Pagination } from 'domain/protocol';
-import type { Role } from 'domain/enums';
+import type { OpeningHour } from 'domain/models/opening-hour';
 import type { Style } from 'domain/models/style';
 
 export interface Restaurant {
@@ -18,6 +18,7 @@ export interface Restaurant {
   minimumDeliveryPrice: number;
   minimumOrderPrice: number;
   priceByKmInDelivery: number;
+  openingHourList: OpeningHour[];
   address?: Address | null;
   style?: Style | null;
   createdAt: Date;
@@ -30,16 +31,12 @@ export interface FindRestaurantQuery extends Pagination {
 
 export interface RestaurantFilter extends FilterPagination, FilterSort {
   name: string;
-  email: string;
-  role: Role[];
 }
 
 export const restaurantFilterInitialState: RestaurantFilter = {
-  email: '',
   name: '',
   orderBy: null,
   orderBySelect: null,
   page: 1,
-  role: [],
   sort: null
 };

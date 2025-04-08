@@ -91,7 +91,7 @@ export const RestaurantStockFilter: FC<RestaurantStockFilterProps> = ({ totalEle
           {totalElements ? (
             <span className={'flex gap-1 '}>
               <strong>{totalElements}</strong>
-              <span>{t('items', { ns: 'common' })}</span>
+              <span>{t('items', { count: totalElements, ns: 'common' })}</span>
             </span>
           ) : null}
         </div>
@@ -179,7 +179,7 @@ export const RestaurantStockFilter: FC<RestaurantStockFilterProps> = ({ totalEle
       </div>
 
       <Collapse in={showFilter}>
-        <div className={'flex gap-10 p-2 py-5'}>
+        <div className={'flex flex-col tablet:flex-row gap-6 tablet:gap-10 p-2 py-5'}>
           <div className={'flex flex-col gap-4'}>
             <MinMaxSearch
               maxValue={quantityMT}
@@ -206,7 +206,7 @@ export const RestaurantStockFilter: FC<RestaurantStockFilterProps> = ({ totalEle
             />
           </div>
 
-          <div className={'flex flex-col w-[250px] gap-3'}>
+          <div className={'flex flex-col tablet:w-[250px] gap-3'}>
             <h2>{t('orderBy', { ns: 'common' })}</h2>
 
             <div className={'flex w-full items-center gap-3'}>
