@@ -9,7 +9,8 @@ export const ItemNotFound: FC = () => {
     <TableCell
       colSpan={100}
       sx={{
-        fontSize: '16px',
+        border: 0,
+        fontSize: '18px',
         fontWeight: '600',
         textAlign: 'center'
       }}

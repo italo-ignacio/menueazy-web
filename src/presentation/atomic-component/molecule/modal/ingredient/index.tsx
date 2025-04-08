@@ -1,5 +1,5 @@
+import { Add, Edit } from '@mui/icons-material';
 import { Button } from '@mui/material';
-import { Edit } from '@mui/icons-material';
 import { IngredientForm } from 'presentation/atomic-component/molecule/form';
 import { Modal } from 'presentation/atomic-component/atom/modal';
 import { useModal } from 'data/hooks';
@@ -22,6 +22,7 @@ export const IngredientModal: FC<IngredientModalProps> = ({ ingredient }) => {
         ingredient
           ? undefined
           : {
+              StartIcon: Add,
               title: t('stock.filter.newIngredient', { ns: 'restaurant' })
             }
       }

@@ -1,9 +1,10 @@
-import { QueryName, apiPaths } from 'main/config';
+import { QueryName, apiPaths, paths } from 'main/config';
 import { api } from 'infra/http';
 import { queryClient } from 'infra/lib';
 import { resolverError } from 'main/utils';
 import { restaurantSchema } from 'validation/schema';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import type { Restaurant } from 'domain/models';
 import type { RestaurantRequest } from 'validation/schema';
@@ -23,6 +24,8 @@ export const useRequestRestaurant = ({
     resolver: yupResolver(restaurantSchema)
   });
 
+  const navigate = useNavigate();
+
   const onSubmit: SubmitHandler<RestaurantRequest> = async (data) => {
     try {
       if (restaurant)
@@ -36,6 +39,8 @@ export const useRequestRestaurant = ({
           body: data,
           route: apiPaths.restaurant
         });
+
+      if (!restaurant) navigate(paths.restaurantDashboard(data.restaurantUrl));
 
       queryClient.invalidateQueries(QueryName.restaurant);
 
