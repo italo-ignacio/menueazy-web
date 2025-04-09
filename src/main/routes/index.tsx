@@ -14,7 +14,6 @@ import {
   RestaurantOrderContent,
   RestaurantPersonalizationContent,
   RestaurantProductContent,
-  RestaurantProductEditContent,
   RestaurantProductIdContent,
   RestaurantStockContent,
   RestaurantStockIdContent,
@@ -65,10 +64,6 @@ const RouterConfig: FC = () => (
 
             <Route element={<RestaurantProductContent />} path={routePaths.restaurantProduct} />
             <Route element={<RestaurantProductIdContent />} path={routePaths.restaurantProductId} />
-            <Route
-              element={<RestaurantProductEditContent />}
-              path={routePaths.restaurantProductEdit}
-            />
 
             <Route element={<RestaurantStockContent />} path={routePaths.restaurantStock} />
             <Route element={<RestaurantStockIdContent />} path={routePaths.restaurantStockId} />

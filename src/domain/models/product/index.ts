@@ -71,7 +71,7 @@ export const productFilterInitialState: ProductFilter = {
   categoryList: [],
   highlight: '',
   inStock: '',
-  limit: 5,
+  limit: 6,
   name: '',
   orderBy: null,
   orderBySelect: null,

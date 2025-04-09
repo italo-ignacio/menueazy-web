@@ -3,6 +3,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { filterReducer } from './filters/slice';
 import { persistReducer, persistStore } from 'redux-persist';
 import { persistReducer as persistedReducer } from './persist/slice';
+import { productIdReducer } from './product-id/slice';
 import { selectReducer } from './select/slice';
 import { sidebarReducer } from './sidebar/slice';
 import { useSelector } from 'react-redux';
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   a: aReducer,
   filter: filterReducer,
   persist: persisted,
+  productId: productIdReducer,
   select: selectReducer,
   sidebar: sidebarReducer
 });

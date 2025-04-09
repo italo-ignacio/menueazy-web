@@ -22,7 +22,7 @@ export interface IngredientDataFilter extends FilterPagination, FilterSort {
 }
 
 export const ingredientDataFilterInitialState: IngredientDataFilter = {
-  limit: 5,
+  limit: 6,
   orderBy: null,
   orderBySelect: null,
   page: 1,

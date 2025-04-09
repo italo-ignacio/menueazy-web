@@ -18,7 +18,6 @@ export * from './restaurant-order';
 export * from './restaurant-personalization';
 
 export * from './restaurant-product';
-export * from './restaurant-product-edit';
 export * from './restaurant-product-id';
 
 export * from './restaurant-stock';

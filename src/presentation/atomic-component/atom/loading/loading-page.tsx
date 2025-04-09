@@ -7,7 +7,7 @@ interface Props {
 
 export const LoadingPage: FC<Props> = ({ hasShadow = false }) => (
   <div
-    className={'h-screen fixed w-full items-center justify-center flex'}
+    className={'h-screen fixed w-full items-center top-0 left-0 justify-center flex'}
     style={{
       background: hasShadow ? 'rgba(0, 0, 0, 0.35)' : colors.white,
       zIndex: hasShadow ? '200' : '300'

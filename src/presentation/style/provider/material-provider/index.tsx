@@ -234,8 +234,7 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
               borderRadius: '4px',
               paddingLeft: '8px',
               paddingRight: '4px'
-            },
-            boxShadow: '0px 12px 13px -8px rgba(0,0,0,0.04)'
+            }
           }
         },
         variants: [

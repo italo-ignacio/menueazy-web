@@ -63,7 +63,7 @@ export const RestaurantProductFilter: FC<RestaurantProductFilterProps> = ({ tota
         route: apiPaths.product(restaurantId)
       });
 
-      navigate(paths.restaurantProductEdit(restaurantUrl, id));
+      navigate(paths.restaurantProductId(restaurantUrl, id));
     } catch (error) {
       resolverError(error);
     }

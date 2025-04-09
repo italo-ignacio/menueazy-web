@@ -81,6 +81,7 @@ export const RestaurantForm: FC<RestaurantFormProps> = ({ closeModal }) => {
           label={'Nome'}
           name={'name'}
           placeholder={'Digite o nome'}
+          required
         />
 
         <InputController
@@ -88,6 +89,7 @@ export const RestaurantForm: FC<RestaurantFormProps> = ({ closeModal }) => {
           label={'Telefone'}
           name={'phone'}
           placeholder={'Digite o telefone'}
+          required
           type={'number'}
         />
 
@@ -98,6 +100,7 @@ export const RestaurantForm: FC<RestaurantFormProps> = ({ closeModal }) => {
             label={'URL do restaurant'}
             onChange={(event): void => setUrl(event.target.value)}
             placeholder={'Digite a URL do restaurant'}
+            required
             value={url}
           />
 

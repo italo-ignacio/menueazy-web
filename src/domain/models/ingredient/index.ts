@@ -42,7 +42,7 @@ export interface IngredientFilter extends FilterPagination, FilterSort {
 
 export const ingredientFilterInitialState: IngredientFilter = {
   cardSize: 4,
-  limit: 5,
+  limit: 6,
   name: '',
   orderBy: null,
   orderBySelect: null,

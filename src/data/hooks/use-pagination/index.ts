@@ -5,12 +5,12 @@ const firstPage = 1;
 
 export const usePagination = (): {
   page: number;
-  handleChangePage: (event: unknown, newPage: number) => void;
+  handleChangePage: (newPage: number) => void;
   setPage: Dispatch<SetStateAction<number>>;
 } => {
   const [page, setPage] = useState(firstPage);
 
-  const handleChangePage = (_event: unknown, newPage: number): void => {
+  const handleChangePage = (newPage: number): void => {
     setPage(newPage);
   };
 

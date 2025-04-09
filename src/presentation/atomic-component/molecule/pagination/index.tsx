@@ -76,6 +76,8 @@ export const Pagination: FC<PaginationProps> = ({
     return null;
   };
 
+  if (totalPages === 1 && !handleChangeLimit && !limit) return null;
+
   return (
     <div className={'flex flex-col-reverse gap-5 justify-between tablet:flex-row-reverse'}>
       {totalPages && totalPages > 0 ? (
