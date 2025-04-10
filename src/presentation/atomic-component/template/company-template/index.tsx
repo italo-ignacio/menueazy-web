@@ -1,6 +1,6 @@
 import { type FC, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { PrivateFooter, PrivateHeader, Sidebar } from 'presentation/atomic-component/organism';
+import { PrivateHeader, Sidebar } from 'presentation/atomic-component/organism';
 import { dimensions } from 'main/config';
 import { useAppSelector } from 'store';
 import { useWindowDimensions } from 'data/hooks';
@@ -39,15 +39,13 @@ export const CompanyTemplate: FC = () => {
 
         <div
           className={
-            'flex flex-col w-full text-gray-900 min-h-[calc(100dvh-45px)] px-4 py-8 overflow-x-hidden tablet:px-8'
+            'flex flex-col w-full text-gray-900 min-h-[calc(100dvh+1px)] px-4 py-8 pb-4 overflow-x-hidden tablet:px-8'
           }
           style={{ marginLeft: getMarginLeft(), transition: 'all 200ms' }}
         >
           <Outlet />
         </div>
       </main>
-
-      <PrivateFooter />
     </div>
   );
 };

@@ -16,5 +16,10 @@ export const IconRender: FC<IconRenderProps> = ({ name, sx }) => {
 
   if (!IconComponent) return <div className={'text-red font-semibold'}>Ícone inválido</div>;
 
-  return <IconComponent color={'inherit'} sx={sx} />;
+  return (
+    <IconComponent
+      color={'inherit'}
+      sx={{ ':hover': { rotate: '1.5deg', scale: 1.15, transition: 'all 0.15s ease-in' }, ...sx }}
+    />
+  );
 };

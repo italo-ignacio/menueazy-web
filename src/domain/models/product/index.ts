@@ -37,7 +37,7 @@ export interface FindProductQuery extends Pagination {
 
 export interface ProductFilter extends FilterPagination, FilterSort {
   name: string;
-  price: string;
+  finalPrice: string;
 
   priceMT: string;
   priceLT: string;
@@ -69,6 +69,7 @@ export const productFilterInitialState: ProductFilter = {
   avgRateMT: '',
   cardSize: 4,
   categoryList: [],
+  finalPrice: '',
   highlight: '',
   inStock: '',
   limit: 6,
@@ -76,7 +77,6 @@ export const productFilterInitialState: ProductFilter = {
   orderBy: null,
   orderBySelect: null,
   page: 1,
-  price: '',
   priceLT: '',
   priceMT: '',
   published: '',

@@ -15,6 +15,7 @@ export * from './format-share-data';
 export * from './format-text';
 export * from './random';
 export * from './update-hash';
+export * from './to-number';
 export * from './format-number';
 export * from './remove-accents';
 export * from './adjusted-date';

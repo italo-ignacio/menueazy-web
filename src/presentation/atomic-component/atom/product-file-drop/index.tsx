@@ -1,23 +1,27 @@
 import { Add } from '@mui/icons-material';
-import { QueryName, apiPaths } from 'main/config';
 import { api } from 'infra/http';
+import { apiPaths } from 'main/config';
 import { callToast, resolverError } from 'main/utils';
 import { colors } from 'presentation/style';
-import { queryClient } from 'infra/lib';
+import { setProductId } from 'store/product-id/slice';
+import { useDispatch } from 'react-redux';
 import { useRef, useState } from 'react';
 import { useRestaurant } from 'data/hooks';
 import type { ChangeEvent, DragEvent, FC } from 'react';
+import type { Image } from 'domain/models';
 
 interface ProductFileDropProps {
   limit: number;
   productId: number;
+  images: Image[];
 }
 
-export const ProductFileDrop: FC<ProductFileDropProps> = ({ productId, limit }) => {
+export const ProductFileDrop: FC<ProductFileDropProps> = ({ productId, images, limit }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
 
   const { restaurantId } = useRestaurant();
+  const dispatch = useDispatch();
 
   const handleDragOver = (event: DragEvent<HTMLDivElement>): void => {
     event.preventDefault();
@@ -50,13 +54,23 @@ export const ProductFileDrop: FC<ProductFileDropProps> = ({ productId, limit }) 
         formData.append('images', item);
       });
 
-      await api.post({
+      const data = await api.post<Image[]>({
         body: formData,
         isFormData: true,
         route: apiPaths.productImage(restaurantId, productId)
       });
 
-      queryClient.invalidateQueries(QueryName.product);
+      dispatch(
+        setProductId({
+          imageList: [
+            ...images,
+            ...data.map((item, index) => ({
+              ...item,
+              url: URL.createObjectURL(acceptedFiles[index])
+            }))
+          ]
+        })
+      );
     } catch (error) {
       resolverError(error);
     }

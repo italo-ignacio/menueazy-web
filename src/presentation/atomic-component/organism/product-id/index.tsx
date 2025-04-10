@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { BlockSidebar } from 'presentation/atomic-component/atom/loading/block-sidebar';
 import { Button } from '@mui/material';
-import { ProductCard } from 'presentation/atomic-component/atom';
+import { DeleteConfirmationModal } from 'presentation/atomic-component/molecule/modal/action-confirmation';
+import { PreviewProductIdCard } from 'presentation/atomic-component/atom';
 import { ProductIdGeneralForm } from 'presentation/atomic-component/molecule/form/product-id';
 import { ProductIdTabs } from './tabs';
-import { paths } from 'main/config';
+import { QueryName, apiPaths, paths } from 'main/config';
 import { setProductIdComplete } from 'store/product-id/slice';
-import { useAppSelector } from 'store';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -23,13 +23,12 @@ export const ProductIdTemplate: FC<ProductIdTemplateProps> = ({ product }) => {
     'GENERAL'
   );
 
-  const { product: productData } = useAppSelector((state) => state.productId);
   const dispatch = useDispatch();
 
   const [hasUpdate, setHasUpdate] = useState(false);
 
   const navigate = useNavigate();
-  const { restaurantUrl } = useRestaurant();
+  const { restaurantUrl, restaurantId } = useRestaurant();
 
   const handleClickButton = (type: 'next' | 'preview'): void => {
     if (hasUpdate) {
@@ -43,12 +42,7 @@ export const ProductIdTemplate: FC<ProductIdTemplateProps> = ({ product }) => {
   };
 
   useEffect(() => {
-    dispatch(
-      setProductIdComplete({
-        ...product,
-        categoryList: product.categoryList.map((item) => item.id)
-      })
-    );
+    dispatch(setProductIdComplete(product));
   }, [product]);
 
   const getForm = (): ReactNode => {
@@ -85,11 +79,24 @@ export const ProductIdTemplate: FC<ProductIdTemplateProps> = ({ product }) => {
         </div>
 
         <div className={'w-[35%]'}>
-          <ProductCard {...product} {...productData} />
+          <PreviewProductIdCard />
         </div>
       </div>
 
       <div className={'flex gap-6 bg-white w-full rounded-md border shadow-base p-3 justify-end'}>
+        <DeleteConfirmationModal
+          afterDelete={(): void => {
+            navigate(paths.restaurantProduct(restaurantUrl));
+          }}
+          id={product.id}
+          openElement={<Button color={'error'}>Deletar produto</Button>}
+          queryName={QueryName.product}
+          route={apiPaths.product(restaurantId)}
+          successMessage={'Produto deletado com sucesso!'}
+          text={'Tem certeza q deseja deletar o produto selecionado?'}
+          title={'Deletar produto'}
+        />
+
         <Button
           color={'warning'}
           onClick={(): void => {
@@ -99,7 +106,12 @@ export const ProductIdTemplate: FC<ProductIdTemplateProps> = ({ product }) => {
           {tabSelected === 'GENERAL' ? 'Cancelar' : 'Voltar'}
         </Button>
 
-        <Button color={'warning'}>Salvar</Button>
+        <Button
+          color={'warning'}
+          onClick={(): void => document.getElementById(`${tabSelected}-submit`)?.click()}
+        >
+          Salvar
+        </Button>
 
         <Button
           onClick={(): void => {

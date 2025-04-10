@@ -57,18 +57,18 @@ export const ProductTableHeader: FC<ProductTableHeaderProps> = ({ query }) => {
         />
 
         <HeaderCell
-          minWidth={150}
+          minWidth={164}
           title={
             <TableSort
-              filterName={'price'}
-              sortItem={setSortFilter('product', 'price')}
+              filterName={'finalPrice'}
+              sortItem={setSortFilter('product', 'finalPrice')}
               title={t('product.table.price')}
             />
           }
         />
 
         <HeaderCell
-          minWidth={150}
+          minWidth={145}
           title={
             <TableSort
               filterName={'published'}
@@ -79,7 +79,7 @@ export const ProductTableHeader: FC<ProductTableHeaderProps> = ({ query }) => {
         />
 
         <HeaderCell
-          minWidth={150}
+          minWidth={145}
           title={
             <TableSort
               filterName={'inStock'}
@@ -90,7 +90,7 @@ export const ProductTableHeader: FC<ProductTableHeaderProps> = ({ query }) => {
         />
 
         <HeaderCell
-          minWidth={150}
+          minWidth={145}
           title={
             <TableSort
               filterName={'highlight'}
@@ -100,9 +100,8 @@ export const ProductTableHeader: FC<ProductTableHeaderProps> = ({ query }) => {
           }
         />
 
-        {/* <HeaderCell minWidth={130} title={t('product.table.totalSold')} /> */}
         <HeaderCell
-          minWidth={210}
+          minWidth={170}
           title={
             <TableSort
               filterName={'avgRate'}
@@ -112,7 +111,7 @@ export const ProductTableHeader: FC<ProductTableHeaderProps> = ({ query }) => {
           }
         />
 
-        <HeaderCell last minWidth={50} title={''} />
+        <HeaderCell last maxWidth={10} minWidth={10} title={''} width={10} />
       </TableRow>
     </TableHead>
   );

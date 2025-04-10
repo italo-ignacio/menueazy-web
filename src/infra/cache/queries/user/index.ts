@@ -9,4 +9,4 @@ export const useFindUserQuery = ({ ...props }: useFindQueryProps): UseQueryResul
 export const useFindOneUserQuery = ({
   ...props
 }: useFindQueryProps & { id: string }): UseQueryResult<User> =>
-  useFindQuery<User>({ ...props, route: 'user' });
+  useFindQuery<User>({ ...props, retry: 0, route: 'user' });

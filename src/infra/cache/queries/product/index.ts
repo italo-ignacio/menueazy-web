@@ -23,5 +23,6 @@ export const useFindOneProductQuery = ({
     ...props,
     apiRoute: apiPaths.product(restaurantId),
     id,
+    retry: 0,
     route: 'product'
   });

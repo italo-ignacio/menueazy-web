@@ -7,6 +7,7 @@ interface useDeleteProps {
   id: number | string;
   route: unknown;
   closeModal: () => void;
+  afterDelete?: () => void;
   queryName: string;
   successMessage: string;
   isPatch?: boolean;
@@ -16,6 +17,7 @@ export const useDelete = ({
   id,
   route,
   closeModal,
+  afterDelete,
   queryName,
   successMessage,
   isPatch
@@ -27,6 +29,7 @@ export const useDelete = ({
 
       queryClient.invalidateQueries(queryName);
       toast.success(successMessage);
+      if (afterDelete) afterDelete();
       closeModal();
     } catch (error) {
       resolverError(error);

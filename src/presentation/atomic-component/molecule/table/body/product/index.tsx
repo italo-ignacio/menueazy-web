@@ -1,8 +1,8 @@
 import { BodyCell, ItemNotFound } from 'presentation/atomic-component/atom';
 import { Button, Checkbox, IconButton, Switch, TableBody, TableRow } from '@mui/material';
-import { type FindProductQuery, currencyData } from 'domain/models';
 import { Link } from 'react-router-dom';
 import { NavigateNext, Star, StarOutline } from '@mui/icons-material';
+import { PriceWithDiscount } from 'presentation/atomic-component/atom/price-with-discount';
 import { QueryName, apiPaths, paths } from 'main/config';
 import { addSelectData, removeSelectData } from 'store/select/slice';
 import { api } from 'infra/http';
@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { useRestaurant } from 'data/hooks';
 import { useTranslation } from 'react-i18next';
 import type { FC } from 'react';
+import type { FindProductQuery } from 'domain/models';
 import type { UseQueryResult } from 'react-query';
 
 interface ProductTableBodyProps {
@@ -27,7 +28,6 @@ interface ActionDataProps {
 }
 
 export const ProductTableBody: FC<ProductTableBodyProps> = ({ query }) => {
-  const { currency } = useAppSelector((state) => state.persist);
   const { productSelected } = useAppSelector((state) => state.select);
   const dispatch = useDispatch();
 
@@ -65,7 +65,7 @@ export const ProductTableBody: FC<ProductTableBodyProps> = ({ query }) => {
           <BodyCell
             firstRow={index === 0}
             title={
-              <div className={'flex items-center gap-3 h-12'}>
+              <div className={'flex items-center gap-3 h-12'} title={item.name}>
                 <Checkbox
                   checked={!!productSelected[item.id]}
                   onChange={(event): void => {
@@ -78,15 +78,18 @@ export const ProductTableBody: FC<ProductTableBodyProps> = ({ query }) => {
                 {item.imageList?.length ? (
                   <img
                     alt={' '}
-                    className={'object-fill rounded-sm'}
-                    height={50}
+                    className={'object-fill w-[50px] max-h-[50px] rounded'}
                     src={item.imageList[0].url}
-                    width={50}
                   />
-                ) : null}
+                ) : (
+                  <span className={'w-[50px] h-[50px]'} />
+                )}
 
                 <div>
-                  <h3 className={'font-semibold text-base'}>{item.name}</h3>
+                  <h3 className={'font-semibold text-[15px] line-clamp-2 max-w-[300px]'}>
+                    {item.name}
+                  </h3>
+
                   <span>{t('product.table.sold', { count: item?.totalOrder ?? 0 })}</span>
                 </div>
               </div>
@@ -96,9 +99,12 @@ export const ProductTableBody: FC<ProductTableBodyProps> = ({ query }) => {
           <BodyCell
             firstRow={index === 0}
             title={
-              <span>
-                {currencyData[currency].symbol} <strong>{item.price.toFixed(2)}</strong>
-              </span>
+              <PriceWithDiscount
+                discount={item.discount}
+                finishDiscountAt={item.finishDiscountAt}
+                price={item.price}
+                startDiscountAt={item.startDiscountAt}
+              />
             }
           />
 

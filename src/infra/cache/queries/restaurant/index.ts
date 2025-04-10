@@ -11,4 +11,4 @@ export const useFindRestaurantQuery = ({
 export const useFindOneRestaurantQuery = ({
   ...props
 }: useFindQueryProps & { id: string }): UseQueryResult<Restaurant> =>
-  useFindQuery<Restaurant>({ ...props, route: 'restaurant' });
+  useFindQuery<Restaurant>({ ...props, retry: 0, route: 'restaurant' });

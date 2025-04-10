@@ -23,5 +23,6 @@ export const useFindOneCategoryQuery = ({
     ...props,
     apiRoute: apiPaths.category(restaurantId),
     id,
+    retry: 0,
     route: 'category'
   });

@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { Image } from 'domain/models';
+import type { Category, Image } from 'domain/models';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-interface ProductId {
+export interface ProductId {
   id: number;
   name: string;
   description?: string;
@@ -11,15 +11,18 @@ interface ProductId {
   published: boolean;
   highlight: boolean;
   discount?: number | string;
-  startDiscountAt?: Date | string;
-  finishDiscountAt?: Date | string;
+  startDiscountAt?: Date | null;
+  finishDiscountAt?: Date | null;
   onlyInRestaurant: boolean;
   priceByKmInDelivery?: number | string;
-  categoryList?: number[];
+  categoryList?: Category[];
   imageList?: Image[];
+  avgRate?: number;
+  totalRate?: number;
+  totalOrder?: number;
 }
 
-interface ProductIdIngredient {
+export interface ProductIdIngredient {
   id?: number;
   quantity: number | string;
   additionalPrice: number | string;
@@ -28,7 +31,7 @@ interface ProductIdIngredient {
   maxAddQuantity: number;
 }
 
-interface ProductIdAdditional {
+export interface ProductIdAdditional {
   productOptionGroupList: {
     id: number;
     name: string;

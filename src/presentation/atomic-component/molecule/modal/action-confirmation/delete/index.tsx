@@ -14,6 +14,7 @@ interface DeleteConfirmationModalProps {
   successMessage: string;
   deleteText?: string;
   onClose?: () => void;
+  afterDelete?: () => void;
   openElement?: ReactNode;
   isPatch?: boolean;
   hideCancelButton?: boolean;
@@ -26,6 +27,7 @@ export const DeleteConfirmationModal: FC<DeleteConfirmationModalProps> = ({
   route,
   onClose,
   deleteText,
+  afterDelete,
   hideCancelButton,
   queryName,
   successMessage,
@@ -40,6 +42,7 @@ export const DeleteConfirmationModal: FC<DeleteConfirmationModalProps> = ({
   };
 
   const { handleDelete } = useDelete({
+    afterDelete,
     closeModal,
     id,
     isPatch,
@@ -66,7 +69,7 @@ export const DeleteConfirmationModal: FC<DeleteConfirmationModalProps> = ({
       }
       size={'small'}
     >
-      <div className={'w-full h-full flex flex-col p-1 px-3 gap-3'}>
+      <div className={'w-full h-full flex flex-col gap-3'}>
         <h3 className={'text-xl font-bold'}>{title}</h3>
         <p>{text}</p>
 

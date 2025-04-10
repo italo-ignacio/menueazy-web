@@ -7,10 +7,22 @@ interface ProductIdTabsProps {
 
 export const ProductIdTabs: FC<ProductIdTabsProps> = ({ tabSelected }) => {
   const tabList = [
-    { icon: 'FormatIndentDecrease', subtitle: 'Etapa 1', title: 'Visão Geral', value: 'GENERAL' },
-    { icon: '', subtitle: '', title: 'line-1' },
-    { icon: 'fastfood', subtitle: 'Etapa 2', title: 'Ingredientes', value: 'INGREDIENT' },
-    { icon: '', subtitle: '', title: 'line-2' },
+    {
+      active: ['INGREDIENT', 'ADDITIONAL'],
+      icon: 'FormatIndentDecrease',
+      subtitle: 'Etapa 1',
+      title: 'Visão Geral',
+      value: 'GENERAL'
+    },
+    { active: ['INGREDIENT', 'ADDITIONAL'], icon: '', subtitle: '', title: 'line-1' },
+    {
+      active: ['ADDITIONAL'],
+      icon: 'fastfood',
+      subtitle: 'Etapa 2',
+      title: 'Ingredientes',
+      value: 'INGREDIENT'
+    },
+    { active: ['ADDITIONAL'], icon: '', subtitle: '', title: 'line-2' },
     { icon: 'FormatLineSpacing', subtitle: 'Etapa 3', title: 'Adicionais', value: 'ADDITIONAL' }
   ];
 
@@ -22,14 +34,21 @@ export const ProductIdTabs: FC<ProductIdTabsProps> = ({ tabSelected }) => {
           className={`flex items-center ${item.title.startsWith('line') ? 'w-full max-w-[1 50px]' : 'min-w-max'}`}
         >
           {item.title.startsWith('line') ? (
-            <div className={'h-[2px] w-full bg-gray-350 rounded-full'} />
+            <div className={'h-[2px] w-full rounded-full bg-gray-350'}>
+              <div
+                className={`h-[2px] rounded-full ease-in-out transition-[width] duration-1000 ${item?.active?.includes(tabSelected) ? 'bg-primary w-full' : 'bg-primary w-[0%]'}`}
+              />
+            </div>
           ) : (
             <div className={'flex gap-4 items-center'}>
               <div
                 className={`flex items-center justify-center rounded-md p-1.5 
-                ${tabSelected === item.value ? 'bg-primary text-white' : 'bg-gray-250 text-gray-600'}`}
+                ${tabSelected === item.value || item?.active?.includes(tabSelected) ? 'bg-primary text-white' : 'bg-gray-250 text-gray-600'}`}
               >
-                <IconRender name={item.icon} sx={{ fontSize: '28px' }} />
+                <IconRender
+                  name={item?.active?.includes(tabSelected) ? 'checkCircle' : item.icon}
+                  sx={{ fontSize: '28px' }}
+                />
               </div>
 
               <div className={'flex flex-col'}>

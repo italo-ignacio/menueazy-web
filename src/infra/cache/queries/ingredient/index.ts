@@ -23,5 +23,6 @@ export const useFindOneIngredientQuery = ({
     ...props,
     apiRoute: apiPaths.ingredient(restaurantId),
     id,
+    retry: 0,
     route: 'ingredient'
   });
