@@ -4,3 +4,4 @@ export * from './product';
 export * from './restaurant';
 export * from './ingredient';
 export * from './ingredient-data';
+export * from './category';

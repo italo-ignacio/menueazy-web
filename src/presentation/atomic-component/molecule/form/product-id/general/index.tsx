@@ -1,7 +1,8 @@
+/* eslint-disable complexity */
 import { Add, Star, StarOutline } from '@mui/icons-material';
 import { Button, FormControlLabel, FormGroup, Switch } from '@mui/material';
+import { CategoryModal } from 'presentation/atomic-component/molecule/modal';
 import { DateInput } from 'presentation/atomic-component/atom';
-import { type FC, useEffect } from 'react';
 import { InputController } from 'presentation/atomic-component/atom/input-controller';
 import { type Product, currencyData } from 'domain/models';
 import { ProductFileDrop } from 'presentation/atomic-component/atom/product-file-drop';
@@ -10,20 +11,24 @@ import { colors } from 'presentation/style';
 import { setProductId } from 'store/product-id/slice';
 import { useAppSelector } from 'store';
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { useFindCategoryQuery } from 'infra/cache';
 import { useProductIdGeneral } from 'data/use-case/form/use-product-id/general';
 import { useRestaurant } from 'data/hooks';
 import { validate } from 'main/utils';
+import type { Dispatch, FC, SetStateAction } from 'react';
 
 interface ProductIdGeneralFormProps {
   product: Product;
+  setHasUpdate: Dispatch<SetStateAction<boolean>>;
 }
 
-export const ProductIdGeneralForm: FC<ProductIdGeneralFormProps> = ({ product }) => {
+export const ProductIdGeneralForm: FC<ProductIdGeneralFormProps> = ({ product, setHasUpdate }) => {
   const { restaurantId } = useRestaurant();
 
   const { handleSubmit, onSubmit, control, setValue } = useProductIdGeneral({
-    product
+    product,
+    setHasUpdate
   });
 
   const { product: productData } = useAppSelector((state) => state.productId);
@@ -33,25 +38,55 @@ export const ProductIdGeneralForm: FC<ProductIdGeneralFormProps> = ({ product })
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setValue('name', productData?.name ?? '');
-    setValue('description', productData?.description ?? '');
-    setValue('price', String(productData?.price ?? ''));
-    setValue('discount', String(productData?.discount ?? ''));
+    setValue('name', product?.name ?? '');
+    setValue('description', product?.description ?? '');
+    setValue('price', String(product?.price ?? ''));
+    setValue('discount', String(product?.discount ?? ''));
 
-    setValue('startDiscountAt', productData?.startDiscountAt);
-    setValue('finishDiscountAt', productData?.finishDiscountAt);
+    setValue('startDiscountAt', product?.startDiscountAt);
+    setValue('finishDiscountAt', product?.finishDiscountAt);
 
-    setValue('inStock', productData?.inStock ?? false);
-    setValue('highlight', productData?.highlight ?? false);
-    setValue('published', productData?.published ?? false);
+    setValue('inStock', product?.inStock ?? false);
+    setValue('highlight', product?.highlight ?? false);
+    setValue('published', product?.published ?? false);
 
-    setValue('onlyInRestaurant', productData?.onlyInRestaurant ?? false);
+    setValue('onlyInRestaurant', product?.onlyInRestaurant ?? false);
+  }, [product]);
+
+  useEffect(() => {
+    let change = false;
+
+    if (product?.name !== productData?.name) change = true;
+    if (product?.description !== productData?.description) change = true;
+    if (String(product?.price ?? '') !== String(productData?.price ?? '')) change = true;
+    if (String(product?.discount ?? '') !== String(productData?.discount ?? '')) change = true;
+
+    if (product?.startDiscountAt !== productData?.startDiscountAt) change = true;
+    if (product?.finishDiscountAt !== productData?.finishDiscountAt) change = true;
+
+    if ((product?.inStock ?? false) !== (productData?.inStock ?? false)) change = true;
+    if ((product?.highlight ?? false) !== (productData?.highlight ?? false)) change = true;
+    if ((product?.published ?? false) !== (productData?.published ?? false)) change = true;
+
+    if ((product?.onlyInRestaurant ?? false) !== (productData?.onlyInRestaurant ?? false))
+      change = true;
+
+    if (product?.categoryList?.length !== productData?.categoryList?.length) change = true;
+    else if (
+      !productData?.categoryList?.every((item) =>
+        product?.categoryList?.find((value) => value.id === item.id)
+      )
+    )
+      change = true;
+
+    if (change) setHasUpdate(true);
+    else setHasUpdate(false);
   }, [productData]);
 
   return (
     <form className={'flex flex-col gap-[30px] pt-4 w-full'} onSubmit={handleSubmit(onSubmit)}>
-      <div className={'flex gap-6'}>
-        <div className={'flex flex-col gap-1 w-[60%]'}>
+      <div className={'flex flex-col tablet:flex-row gap-6'}>
+        <div className={'flex flex-col gap-1 w-full tablet:w-[60%]'}>
           <h2 className={'font-bold'}>
             Imagens do produto <span className={'text-red'}>*</span>
           </h2>
@@ -81,8 +116,8 @@ export const ProductIdGeneralForm: FC<ProductIdGeneralFormProps> = ({ product })
         </div>
       </div>
 
-      <div className={'flex gap-6'}>
-        <div className={'flex flex-col gap-1 w-[60%]'}>
+      <div className={'flex flex-col tablet:flex-row gap-6'}>
+        <div className={'flex flex-col gap-1 w-full tablet:w-[60%]'}>
           <h2 className={'font-bold'}>
             Nome do produto <span className={'text-red'}>*</span>
           </h2>
@@ -108,8 +143,8 @@ export const ProductIdGeneralForm: FC<ProductIdGeneralFormProps> = ({ product })
         </div>
       </div>
 
-      <div className={'flex gap-6'}>
-        <div className={'flex flex-col gap-1 w-[60%]'}>
+      <div className={'flex flex-col tablet:flex-row gap-6'}>
+        <div className={'flex flex-col gap-1 w-full tablet:w-[60%]'}>
           <h2 className={'font-bold'}>
             Preço <span className={'text-red'}>*</span>
           </h2>
@@ -137,7 +172,7 @@ export const ProductIdGeneralForm: FC<ProductIdGeneralFormProps> = ({ product })
         </div>
       </div>
 
-      <div className={'flex gap-6'}>
+      <div className={'flex flex-col tablet:flex-row gap-6'}>
         <div className={'flex flex-col justify-end gap-1 w-[60%]'}>
           <h2 className={'font-bold'}>Valor promocional</h2>
 
@@ -165,7 +200,7 @@ export const ProductIdGeneralForm: FC<ProductIdGeneralFormProps> = ({ product })
             value={String(productData?.discount ?? '')}
           />
 
-          <div className={'flex items-end gap-3 w-full'}>
+          <div className={'flex flex-col tablet:flex-row items-end gap-3 w-full'}>
             <DateInput
               label={'Início da promoção'}
               minDate={new Date()}
@@ -191,8 +226,8 @@ export const ProductIdGeneralForm: FC<ProductIdGeneralFormProps> = ({ product })
         </div>
       </div>
 
-      <div className={'flex gap-6'}>
-        <div className={'flex flex-col gap-1 w-[60%]'}>
+      <div className={'flex flex-col tablet:flex-row gap-6'}>
+        <div className={'flex flex-col gap-1 w-full tablet:w-[60%]'}>
           <h2 className={'font-bold'}>
             Visualização <span className={'text-red'}>*</span>
           </h2>
@@ -255,8 +290,8 @@ export const ProductIdGeneralForm: FC<ProductIdGeneralFormProps> = ({ product })
         </div>
       </div>
 
-      <div className={'flex gap-6'}>
-        <div className={'flex flex-col gap-1 w-[60%]'}>
+      <div className={'flex flex-col tablet:flex-row gap-6'}>
+        <div className={'flex flex-col gap-1 w-full tablet:w-[60%]'}>
           <h2 className={'font-bold'}>
             Descrição <span className={'text-red'}>*</span>
           </h2>
@@ -284,8 +319,8 @@ export const ProductIdGeneralForm: FC<ProductIdGeneralFormProps> = ({ product })
         </div>
       </div>
 
-      <div className={'flex gap-6'}>
-        <div className={'flex flex-col gap-2 w-[60%]'}>
+      <div className={'flex flex-col tablet:flex-row gap-6'}>
+        <div className={'flex flex-col gap-2 w-full tablet:w-[60%]'}>
           <div className={'flex flex-wrap justify-between items-center'}>
             <h2 className={'font-bold'}>
               Categorias <span className={'text-red'}>*</span>
@@ -320,14 +355,18 @@ export const ProductIdGeneralForm: FC<ProductIdGeneralFormProps> = ({ product })
             );
           })}
 
-          <Button startIcon={<Add />} sx={{ padding: '2px 12px' }} variant={'outlined'}>
-            Nova categoria
-          </Button>
+          <CategoryModal
+            openElement={
+              <Button startIcon={<Add />} sx={{ padding: '2px 12px' }} variant={'outlined'}>
+                Nova categoria
+              </Button>
+            }
+          />
         </div>
       </div>
 
-      <div className={'flex gap-6'}>
-        <div className={'flex flex-col gap-1 w-[60%]'}>
+      <div className={'flex flex-col tablet:flex-row gap-6'}>
+        <div className={'flex flex-col gap-1 w-full tablet:w-[60%]'}>
           <h2 className={'font-bold'}>
             Tipo de venda <span className={'text-red'}>*</span>
           </h2>

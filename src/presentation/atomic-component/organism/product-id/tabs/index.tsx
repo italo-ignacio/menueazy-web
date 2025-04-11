@@ -31,10 +31,10 @@ export const ProductIdTabs: FC<ProductIdTabsProps> = ({ tabSelected }) => {
       {tabList.map((item) => (
         <div
           key={item.title}
-          className={`flex items-center ${item.title.startsWith('line') ? 'w-full max-w-[1 50px]' : 'min-w-max'}`}
+          className={`flex items-center ${item.title.startsWith('line') ? 'w-full max-w-[1 50px]' : 'min-w-max'} ${tabSelected === item.value ? 'flex' : 'hidden tablet:flex'}`}
         >
           {item.title.startsWith('line') ? (
-            <div className={'h-[2px] w-full rounded-full bg-gray-350'}>
+            <div className={'hidden tablet:flex h-[2px] w-full rounded-full bg-gray-350'}>
               <div
                 className={`h-[2px] rounded-full ease-in-out transition-[width] duration-1000 ${item?.active?.includes(tabSelected) ? 'bg-primary w-full' : 'bg-primary w-[0%]'}`}
               />

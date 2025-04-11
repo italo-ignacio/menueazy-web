@@ -39,7 +39,7 @@ export const RestaurantTemplate: FC = () => {
 
         <div
           className={
-            'flex flex-col w-full text-gray-900 min-h-[calc(100dvh+1px)] px-4 py-8 pb-4 overflow-x-hidden tablet:px-8'
+            'flex flex-col w-full text-gray-900 min-h-[calc(100dvh+1px)] px-4 py-4 tablet:pt-8 pb-2 overflow-x-hidden tablet:px-8'
           }
           style={{ marginLeft: getMarginLeft(), transition: 'all 200ms' }}
         >

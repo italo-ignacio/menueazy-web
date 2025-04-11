@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { ItemNotFound, ProductCard } from 'presentation/atomic-component/atom';
 import { Pagination } from 'presentation/atomic-component/molecule';
-import { ProductCard } from 'presentation/atomic-component/atom';
 import { RestaurantProductMassAction } from 'presentation/atomic-component/organism/restaurant-product/mass-action';
 import { useAppSelector } from 'store';
 import { useReduxPagination } from 'data/hooks';
@@ -21,6 +21,12 @@ export const RestaurantProductCards: FC<RestaurantProductCardsProps> = ({ query 
   return (
     <div className={'flex flex-col gap-4 relative'}>
       <div className={'min-h-[calc(100dvh-48dvh)] shadow-base bg-white'}>
+        {query?.data?.content?.length === 0 && !query.isFetching ? (
+          <div className={'flex w-full justify-center'}>
+            <ItemNotFound />
+          </div>
+        ) : null}
+
         <div
           className={'grid gap-4 w-full p-2'}
           style={{

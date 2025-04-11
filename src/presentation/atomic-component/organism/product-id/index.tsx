@@ -1,7 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { BlockSidebar } from 'presentation/atomic-component/atom/loading/block-sidebar';
 import { Button } from '@mui/material';
-import { DeleteConfirmationModal } from 'presentation/atomic-component/molecule/modal/action-confirmation';
+import {
+  ConfirmationModal,
+  DeleteConfirmationModal
+} from 'presentation/atomic-component/molecule/modal/action-confirmation';
 import { PreviewProductIdCard } from 'presentation/atomic-component/atom';
 import { ProductIdGeneralForm } from 'presentation/atomic-component/molecule/form/product-id';
 import { ProductIdTabs } from './tabs';
@@ -31,11 +34,6 @@ export const ProductIdTemplate: FC<ProductIdTemplateProps> = ({ product }) => {
   const { restaurantUrl, restaurantId } = useRestaurant();
 
   const handleClickButton = (type: 'next' | 'preview'): void => {
-    if (hasUpdate) {
-      setHasUpdate(false);
-      return;
-    }
-
     if (type === 'next') setTabSelected((old) => (old === 'GENERAL' ? 'INGREDIENT' : 'ADDITIONAL'));
     else if (tabSelected === 'GENERAL') navigate(paths.restaurantProduct(restaurantUrl));
     else setTabSelected((old) => (old === 'ADDITIONAL' ? 'INGREDIENT' : 'GENERAL'));
@@ -45,10 +43,22 @@ export const ProductIdTemplate: FC<ProductIdTemplateProps> = ({ product }) => {
     dispatch(setProductIdComplete(product));
   }, [product]);
 
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent): void => {
+      if (hasUpdate) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [hasUpdate]);
+
   const getForm = (): ReactNode => {
     switch (tabSelected) {
       case 'GENERAL':
-        return <ProductIdGeneralForm product={product} />;
+        return <ProductIdGeneralForm product={product} setHasUpdate={setHasUpdate} />;
       case 'ADDITIONAL':
         return null;
       case 'INGREDIENT':
@@ -60,30 +70,57 @@ export const ProductIdTemplate: FC<ProductIdTemplateProps> = ({ product }) => {
   };
 
   return (
-    <div className={'flex flex-col gap-6 w-full'}>
-      {hasUpdate ? <BlockSidebar /> : null}
+    <div className={'flex flex-col gap-4 tablet:gap-6 w-full'}>
+      {hasUpdate ? (
+        <>
+          <BlockSidebar
+            onClick={(): void => document.getElementById('open-sidebar-block-modal')?.click()}
+          />
 
-      <div className={'flex gap-6'}>
-        <div className={'flex flex-col gap-6 w-full'}>
-          <div className={'bg-white w-full border rounded-md shadow-base p-5'}>
+          <ConfirmationModal
+            cancelText={'Cancelar alteracoes'}
+            confirmText={'Salvar alteracoes'}
+            onCancel={(): void => {
+              dispatch(setProductIdComplete(product));
+              setHasUpdate(false);
+            }}
+            onConfirm={(): void => document.getElementById(`${tabSelected}-submit`)?.click()}
+            openElement={<div className={'hidden'} id={'open-sidebar-block-modal'} />}
+            text={'Voce possiu alteracoes pendentes, deseja salva-las?'}
+            title={'Deseja salvar as alteracoes?'}
+          />
+        </>
+      ) : null}
+
+      <div className={'flex flex-col gap-4 tablet:gap-6 w-full laptop:flex-row'}>
+        <div className={'flex flex-col gap-4 tablet:gap-6 w-full'}>
+          <div className={'bg-white w-full border overflow-auto rounded-md shadow-base p-5'}>
             <ProductIdTabs tabSelected={tabSelected} />
           </div>
 
           <div
             className={
-              'bg-white w-full border rounded-md shadow-base p-5 h-[calc(100dvh-30dvh)] overflow-auto'
+              'bg-white w-full border rounded-md shadow-base p-5 laptop:h-[calc(100dvh-30dvh)] laptop:overflow-auto'
             }
           >
             {getForm()}
           </div>
         </div>
 
-        <div className={'w-[35%]'}>
+        <div
+          className={
+            'w-full tablet:w-[45%] tablet:ml-auto laptop:w-[35%] rounded-md laptop:max-h-[calc(100dvh-18dvh)] laptop:overflow-auto'
+          }
+        >
           <PreviewProductIdCard />
         </div>
       </div>
 
-      <div className={'flex gap-6 bg-white w-full rounded-md border shadow-base p-3 justify-end'}>
+      <div
+        className={
+          'flex flex-col tablet:flex-row gap-4 bg-white w-full rounded-md border shadow-base p-3 justify-end'
+        }
+      >
         <DeleteConfirmationModal
           afterDelete={(): void => {
             navigate(paths.restaurantProduct(restaurantUrl));
@@ -97,29 +134,71 @@ export const ProductIdTemplate: FC<ProductIdTemplateProps> = ({ product }) => {
           title={'Deletar produto'}
         />
 
-        <Button
-          color={'warning'}
-          onClick={(): void => {
-            handleClickButton('preview');
-          }}
-        >
-          {tabSelected === 'GENERAL' ? 'Cancelar' : 'Voltar'}
-        </Button>
+        {hasUpdate ? (
+          <ConfirmationModal
+            cancelText={'Cancelar alteracoes'}
+            confirmText={'Salvar alteracoes'}
+            onCancel={(): void => {
+              dispatch(setProductIdComplete(product));
+              setHasUpdate(false);
+              handleClickButton('preview');
+            }}
+            onConfirm={(): void => document.getElementById(`${tabSelected}-submit`)?.click()}
+            openElement={
+              <Button color={'warning'}>{tabSelected === 'GENERAL' ? 'Cancelar' : 'Voltar'}</Button>
+            }
+            text={'Voce possiu alteracoes pendentes, deseja salva-las?'}
+            title={'Deseja salvar as alteracoes?'}
+          />
+        ) : (
+          <Button
+            color={'warning'}
+            onClick={(): void => {
+              handleClickButton('preview');
+            }}
+          >
+            {tabSelected === 'GENERAL' ? 'Cancelar' : 'Voltar'}
+          </Button>
+        )}
 
-        <Button
-          color={'warning'}
-          onClick={(): void => document.getElementById(`${tabSelected}-submit`)?.click()}
-        >
-          Salvar
-        </Button>
+        <div className={'relative flex'}>
+          <Button
+            className={'w-full'}
+            color={'warning'}
+            disabled={!hasUpdate}
+            onClick={(): void => document.getElementById(`${tabSelected}-submit`)?.click()}
+          >
+            Salvar
+          </Button>
 
-        <Button
-          onClick={(): void => {
-            handleClickButton('next');
-          }}
-        >
-          Continuar
-        </Button>
+          {hasUpdate ? (
+            <div className={'h-4 w-4 bg-primary absolute top-[-4px] right-[-4px] rounded-full'} />
+          ) : null}
+        </div>
+
+        {hasUpdate ? (
+          <ConfirmationModal
+            cancelText={'Cancelar alteracoes'}
+            confirmText={'Salvar alteracoes'}
+            onCancel={(): void => {
+              dispatch(setProductIdComplete(product));
+              setHasUpdate(false);
+              handleClickButton('next');
+            }}
+            onConfirm={(): void => document.getElementById(`${tabSelected}-submit`)?.click()}
+            openElement={<Button>Continuar</Button>}
+            text={'Voce possiu alteracoes pendentes, deseja salva-las?'}
+            title={'Deseja salvar as alteracoes?'}
+          />
+        ) : (
+          <Button
+            onClick={(): void => {
+              handleClickButton('next');
+            }}
+          >
+            Continuar
+          </Button>
+        )}
       </div>
     </div>
   );

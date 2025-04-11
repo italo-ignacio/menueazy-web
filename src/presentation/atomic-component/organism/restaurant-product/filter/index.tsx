@@ -129,7 +129,8 @@ export const RestaurantProductFilter: FC<RestaurantProductFilterProps> = ({ tota
             priceMT ||
             typeof published === 'boolean' ||
             totalOrderLT ||
-            totalOrderMT ? (
+            totalOrderMT ||
+            categoryList?.length > 0 ? (
               <span className={'absolute -top-1 -right-2 z-20 bg-primary w-5 h-5 rounded-full'} />
             ) : null}
 
@@ -206,7 +207,7 @@ export const RestaurantProductFilter: FC<RestaurantProductFilterProps> = ({ tota
       </div>
 
       <Collapse in={showFilter}>
-        <div className={'flex gap-10 p-2 py-5'}>
+        <div className={'flex flex-col tablet:flex-row gap-10 p-2 py-5'}>
           <div className={'flex flex-col gap-4'}>
             <MinMaxSearch
               maxValue={priceMT}

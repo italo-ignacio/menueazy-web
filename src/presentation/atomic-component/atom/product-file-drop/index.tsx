@@ -106,7 +106,7 @@ export const ProductFileDrop: FC<ProductFileDropProps> = ({ productId, images, l
   return (
     <div
       className={
-        'border-2 border-primary gap-4 hover:bg-primary/10 min-w-[90px] cursor-pointer text-primary border-dashed flex justify-between max-w-max flex-col tablet:flex-row items-center p-4 rounded-md'
+        'border-2 border-primary gap-4 hover:bg-primary/10 min-w-[90px] cursor-pointer text-primary border-dashed flex justify-between max-w-max flex-row items-center p-4 rounded-md'
       }
       onClick={(): void => {
         inputRef.current?.click();

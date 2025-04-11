@@ -73,7 +73,9 @@ export const DeleteConfirmationModal: FC<DeleteConfirmationModalProps> = ({
         <h3 className={'text-xl font-bold'}>{title}</h3>
         <p>{text}</p>
 
-        <div className={'flex mt-8 flex-row gap-4 max-w-[65%] ml-auto w-full'}>
+        <div
+          className={'flex flex-col mt-8 tablet:flex-row gap-4 tablet:max-w-[65%] ml-auto w-full'}
+        >
           {hideCancelButton ? null : (
             <Button className={'w-full'} color={'warning'} onClick={closeModal}>
               Não, voltar

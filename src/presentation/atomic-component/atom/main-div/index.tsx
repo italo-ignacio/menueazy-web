@@ -16,7 +16,7 @@ export const MainDiv: FC<MenuItemProps> = ({
   endElement,
   title
 }) => (
-  <div className={`flex flex-col gap-6 ${className}`}>
+  <div className={`flex flex-col gap-4 tablet:gap-6 ${className}`}>
     {title ? (
       <div className={'flex flex-col items-start gap-5'}>
         {showGoBack ? <GoBack /> : null}

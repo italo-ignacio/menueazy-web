@@ -1,12 +1,14 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
+import { QueryName, apiPaths } from 'main/config';
 import { api } from 'infra/http';
-import { apiPaths } from 'main/config';
 import { callToast, resolverError, toNumber } from 'main/utils';
 import { productGeneralSchema } from 'validation/schema';
+import { queryClient } from 'infra/lib';
 import { useAppSelector } from 'store';
 import { useForm } from 'react-hook-form';
 import { useRestaurant } from 'data/hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
+import type { Dispatch, SetStateAction } from 'react';
 import type { Product } from 'domain/models';
 import type { ProductGeneralRequest } from 'validation/schema';
 import type { SubmitHandler } from 'react-hook-form';
@@ -14,10 +16,12 @@ import type { formReturn } from 'domain/protocol';
 
 interface useProductIdGeneralProps {
   product: Product;
+  setHasUpdate: Dispatch<SetStateAction<boolean>>;
 }
 
 export const useProductIdGeneral = ({
-  product
+  product,
+  setHasUpdate
 }: useProductIdGeneralProps): formReturn<ProductGeneralRequest> => {
   const formData = useForm<ProductGeneralRequest>({
     resolver: yupResolver(productGeneralSchema)
@@ -57,6 +61,8 @@ export const useProductIdGeneral = ({
         route: apiPaths.product(restaurantId)
       });
 
+      queryClient.invalidateQueries(QueryName.product);
+      setHasUpdate(false);
       callToast.success('Produto atualizado com sucesso');
     } catch (error) {
       resolverError(error);
